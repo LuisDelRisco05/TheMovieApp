@@ -1,69 +1,99 @@
 import { useNavigation } from '@react-navigation/native'
 import { Text, Image, StyleSheet, Pressable, View } from 'react-native'
+import Icon  from 'react-native-vector-icons/Ionicons';
 
 
 
-export const MoviePoster = ({ 
-  movie, 
-  width = 350, 
-  height = 200, 
-  title = false, 
-  marginLeft = 0 ,
-  borderRadius = 18,
-  sizeText = 12
-}) => {
+export const MoviePoster = ({ movie }) => {
 
   const navigation = useNavigation();
 
 
-
-  
-
   const uri = `https://image.tmdb.org/t/p/w500${ movie.poster_path }`
 
   return (
-    <View style={{ alignItems: 'center' }}>
+    
       <Pressable 
         onPress={ () => {
-          navigation.navigate( 'DetailsScreen', movie )
-          startGetMovieId(movie.id)
+          // navigation.navigate( 'DetailsScreen', movie )
+          // startGetMovieId(movie.id)
         }}
-        style={{ ...styles.containerImg, width, height, borderRadius, marginLeft }}
+        style={{ borderRadius: 18 }}
       >
         {
           movie?.poster_path && 
             (
-                <Image 
-                  source={{ uri }}
-                  style={{ flex: 1, borderRadius }}
-                />
+                <View style={{ height: 250 }}>
+                    <Image 
+                      source={{ uri }}
+                      style={ styles.img }
+                      resizeMode='stretch'
+                    />
+                    <View style={ styles.containerInfo }>
+
+                        <Text style={ styles.title }>{movie.title}</Text>
+
+                        <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 20}}>
+
+                          <Icon 
+                            name="star-sharp"
+                            size={ 15 }
+                            color="#FFCE31"
+                          />
+                          <Text style={{ color: '#FFF', marginLeft: 3}}>{movie.vote_average}</Text>
+
+                        </View>
+
+                          <View style={ styles.colorPlay } />
+                            
+                            <Icon 
+                              name="play-circle-sharp"
+                              size={ 52 }
+                              color="#FFF"
+                              style={ styles.iconPlay }
+                            />
+
+                    </View>
+                </View>
             )
         }
         
       </Pressable>
-    </View>
+    
   )
 }
 
 const styles = StyleSheet.create({
-  containerImg:{
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 10,
-    },
-    shadowOpacity: 0.9,
-    shadowRadius: 4.65,
-    elevation: 10,
+  img: {
+    borderRadius: 30,
+    height: 210,
+    width: 350,
   },
-  img: { 
-    flex: 1,
+  containerInfo: {
+    position: 'absolute',
+    bottom: 60,
+    left: 20,
+    width: 310,
+    height: 60,
   },
-  title:{
-    color: '#E2E2E2',
-    marginTop: 2,
-    textAlign: 'center',
-    marginLeft: 8
-  }
+  title: {
+    color: '#FFF',
+    fontSize: 16,
+    fontWeight: '700',
+  },
+  iconPlay: {
+    position: 'absolute',
+    bottom: 2,
+    right: 0,
+    borderRadius: 50,
+  },
+  colorPlay: {
+    backgroundColor: '#FF722A',
+    height: 20,
+    width: 20,
+    position: 'absolute',
+    bottom: 19,
+    right: 15
+  },
 });
 

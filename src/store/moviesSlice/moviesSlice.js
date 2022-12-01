@@ -13,10 +13,10 @@ export const moviesSlice = createSlice({
             state.topRated = payload
             state.loading = false 
         },
-        onSetpopular: ( state, { payload }) => {
+        onSetPopular: ( state, { payload }) => {
             state.popular = payload
         },
-        onSetyouMayLike: ( state, { payload }) => {
+        onSetYouMayLike: ( state, { payload }) => {
             state.youMayLike = payload   
             
         },
@@ -25,6 +25,6 @@ export const moviesSlice = createSlice({
 
 export const { 
     onSetTopRated,
-    onSetpopular,
-    onSetyouMayLike
+    onSetPopular,
+    onSetYouMayLike
 } = moviesSlice.actions;
