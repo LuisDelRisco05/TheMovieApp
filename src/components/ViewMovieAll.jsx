@@ -56,7 +56,7 @@ export const ViewMovieAll = ({ movie  }) => {
                             onPress={ handleDelete }
                             style={ styles.save }>
                             <Icon 
-                                name={ "close-circle"}
+                                name="close-circle"
                                 color="#FFF"
                                 size={ 20 } 
                             />
@@ -71,7 +71,7 @@ export const ViewMovieAll = ({ movie  }) => {
                                 size={ 15 }
                                 color="#FFCE31"
                             />
-                            <Text style={{ color: '#FFF', marginLeft: 3}}>{(movie.vote_average).toString().slice(0, 1)}</Text>
+                            <Text style={{ color: '#FFF', marginLeft: 3}}>{(movie.vote_average).toString().slice(0, 3)}</Text>
 
                         </View>
 

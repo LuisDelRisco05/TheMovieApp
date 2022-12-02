@@ -57,7 +57,7 @@ export const ViewMovieGenre = ({ movie, genre }) => {
                                 size={ 15 }
                                 color="#FFCE31"
                             />
-                            <Text style={{ color: '#FFF', marginLeft: 3}}>{(movie.vote_average).toString().slice(0, 1)}</Text>
+                            <Text style={{ color: '#FFF', marginLeft: 3}}>{(movie.vote_average).toString().slice(0, 3)}</Text>
 
                         </View>
 

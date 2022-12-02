@@ -46,7 +46,7 @@ export const ListMedium = ({ movie }) => {
                                         color="#FFCE31"
                                     />
                                     <Text style={{ color: '#FFF', marginLeft: 3, fontSize: 8.5 }}>
-                                        {(movie.vote_average).toString().slice(0, 1)}
+                                        {(movie.vote_average).toString().slice(0, 3)}
                                     </Text>
 
                                 </View>

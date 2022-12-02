@@ -43,7 +43,6 @@ export const VideoYoutube = ({ infoVideos, moviesDetails }) => {
             <TouchableOpacity
                 style={{ right: 20, position: 'absolute', marginTop: 15, opacity: 0.8 }} 
                 onPress={ () => {
-                    console.log('press');
                     startSavedMovies( moviesDetails )
                     startReset()
                     navigation.navigate('AllScreen') 
@@ -80,7 +79,7 @@ export const VideoYoutube = ({ infoVideos, moviesDetails }) => {
                                     size={ 15 }
                                     color="#FFCE31"
                                 />
-                                <Text style={{ color: '#FFF', marginLeft: 3}}>{(moviesDetails?.vote_average ?? '').toString().slice(0,1)}</Text>
+                                <Text style={{ color: '#FFF', marginLeft: 3}}>{(moviesDetails?.vote_average ?? '').toString().slice(0,3)}</Text>
 
                                 </View>
 
