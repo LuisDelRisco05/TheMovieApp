@@ -8,7 +8,6 @@ import { Loading, VideoYoutube, ListCast, SeccionsDetails, ListMoviesHorizontalS
 
 export const DetailsScreen = ({route}) => {
   const {
-    loading,
     movieId,
     infoVideos,
     moviesDetails,
@@ -27,67 +26,65 @@ export const DetailsScreen = ({route}) => {
     video();
   }, [movieId]);
 
-  console.log(JSON.stringify(similarMovie, null, 3));
 
 
   return (
 
       <View style={{flex: 1}}>
 
-        {loading ? (
-          <Loading />
-        ) 
-        : (
-            <ScrollView>
+        {moviesDetails 
+          && 
+          (
+              <ScrollView>
 
-              <View>
+                <View>
 
-                {/* Video de YouTube */}
+                  {/* Video de YouTube */}
 
-                <VideoYoutube infoVideos={infoVideos} startReset={startReset} moviesDetails={ moviesDetails } />
+                  <VideoYoutube infoVideos={infoVideos} startReset={startReset} moviesDetails={ moviesDetails } />
 
-                <SeccionsDetails movie={ movie } moviesDetails={ moviesDetails } />
+                  <SeccionsDetails movie={ movie } moviesDetails={ moviesDetails } />
 
-                <View style={styles.separator} />
+                  <View style={styles.separator} />
 
-                {/* Sinopsis */}
+                  {/* Sinopsis */}
 
-                <View style={{marginHorizontal: 20, height: 70, marginBottom: 20}}>
+                  <View style={{marginHorizontal: 20, height: 70, marginBottom: 20}}>
 
-                  <Text style={{color: '#C5C4C7', fontSize: 15, marginBottom: 5}}>Story line</Text>
-                  <Text style={{color: '#737278', fontSize: 11, textAlign: 'justify'}}>{moviesDetails.overview}</Text>
-
-                </View>
-
-                {/* Cast */}
-
-                <View style={{ height: 70, marginVertical: 20 }}>
-
-                  <Text style={{ color: '#C5C4C7', fontSize: 15, marginBottom: 5, left: 20 }}>Star cast</Text>
-
-                  <View style={styles.containerCast}>
-
-                    <ListCast cast={cast} />
+                    <Text style={{color: '#C5C4C7', fontSize: 15, marginBottom: 5}}>Story line</Text>
+                    <Text style={{color: '#737278', fontSize: 11, textAlign: 'justify'}}>{moviesDetails.overview}</Text>
 
                   </View>
 
-                </View>
-               
-                {/* Recommended */}
+                  {/* Cast */}
 
-                <View style={{ marginTop: 10 }}>
+                  <View style={{ height: 70, marginVertical: 20 }}>
 
-                  <ListMoviesHorizontalSmall movie={similarMovie} title="Recommended" />
+                    <Text style={{ color: '#C5C4C7', fontSize: 15, marginBottom: 5, left: 20 }}>Star cast</Text>
 
-                </View>
+                    <View style={styles.containerCast}>
 
+                      <ListCast cast={cast} />
+
+                    </View>
+
+                  </View>
                 
-                
+                  {/* Recommended */}
 
-              </View>
+                  <View style={{ marginTop: 10 }}>
 
-            </ScrollView>
-          )
+                    <ListMoviesHorizontalSmall movie={similarMovie} title="Recommended" />
+
+                  </View>
+
+                  
+                  
+
+                </View>
+
+              </ScrollView>
+            )
       }
 
       </View>

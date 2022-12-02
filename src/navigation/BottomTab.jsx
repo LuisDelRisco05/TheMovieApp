@@ -72,7 +72,7 @@ const BottomTab = () => {
           tabBarIcon: ({ color, focused }) => (
             <View>
               <Icon 
-              name={ focused ? "bookmark-sharp" :"bookmark-outline"}
+              name={ focused ? "bookmark" :"bookmark-outline"}
               color={ color }
               size={ 25 }
               />

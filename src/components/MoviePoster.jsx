@@ -45,7 +45,9 @@ export const MoviePoster = ({ movie }) => {
                             size={ 15 }
                             color="#FFCE31"
                           />
-                          <Text style={{ color: '#FFF', marginLeft: 3}}>{movie.vote_average}</Text>
+                          <Text style={{ color: '#FFF', marginLeft: 3}}>
+                            {(movie.vote_average).toString().slice(0, 1)}
+                          </Text>
 
                         </View>
 

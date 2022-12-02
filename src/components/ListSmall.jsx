@@ -14,6 +14,7 @@ export const ListSmall = ({ movie }) => {
 
     const uri = `https://image.tmdb.org/t/p/w500${ movie.poster_path }`
 
+
   return (
             <Pressable 
                 onPress={ () => {
@@ -44,7 +45,9 @@ export const ListSmall = ({ movie }) => {
                                         size={ 9 }
                                         color="#FFCE31"
                                     />
-                                    <Text style={{ color: '#FFF', marginLeft: 3, fontSize: 8.5 }}>{movie.vote_average}</Text>
+                                    <Text style={{ color: '#FFF', marginLeft: 3, fontSize: 8.5 }}>
+                                        {(movie.vote_average).toString().slice(0, 1)}
+                                    </Text>
 
                                 </View>
 

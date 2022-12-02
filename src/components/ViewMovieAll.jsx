@@ -1,34 +1,46 @@
-import { Text, Image, StyleSheet, Pressable, View } from 'react-native'
+import { Text, Image, StyleSheet, Pressable, View, TouchableOpacity } from 'react-native'
 import { useNavigation } from '@react-navigation/native';
 
 import Icon  from 'react-native-vector-icons/Ionicons';
 import { useMoviesStore } from '../hooks/useMoviesStore';
 
 
-export const ViewMovieGenre = ({ movie, genre }) => {
+export const ViewMovieAll = ({ movie  }) => {
+
+    const uri = `https://image.tmdb.org/t/p/w500${ movie.poster_path }`;
 
     const navigation = useNavigation();
 
-    const { startGetMovieId } = useMoviesStore();
+    const { savedMovies, startDeleteSaved, startGetMovieId } = useMoviesStore();
 
-    const uri = `https://image.tmdb.org/t/p/w500${ movie.poster_path }`;
+    const handleDelete = () => {
+
+        const newSave =  savedMovies.filter( mov => (
+            mov.id !== movie.id
+        ))
+
+        startDeleteSaved(newSave)
+    }
 
 
   return (
 
 
     
-    <Pressable 
-        onPress={ () => {
-            navigation.navigate( 'DetailsScreen', movie )
-            startGetMovieId(movie.id)
-        }}
+    <View 
+        
         style={{ borderRadius: 18, flex: 1 }}
     >
         {
         movie?.poster_path && 
             (
-                <View style={styles.container}>
+                <TouchableOpacity 
+                    onPress={ () => {
+                        navigation.navigate( 'DetailsScreen', movie )
+                        startGetMovieId(movie.id)
+                    }}  
+                    style={styles.container}
+                >
 
                     <Image 
                         source={{ uri }}
@@ -40,15 +52,17 @@ export const ViewMovieGenre = ({ movie, genre }) => {
 
                         <Text style={ styles.title }>{movie.title}</Text>
 
-                        <View style={ styles.save }>
+                        <TouchableOpacity 
+                            onPress={ handleDelete }
+                            style={ styles.save }>
                             <Icon 
-                                name={ "bookmark-outline"}
+                                name={ "close-circle"}
                                 color="#FFF"
-                                size={ 15 } 
+                                size={ 20 } 
                             />
-                        </View>
+                        </TouchableOpacity>
 
-                        <Text style={ styles.detail }>{movie.original_language} | {genre} | {movie?.runtime ?? "120"}min</Text>
+                        <Text style={ styles.detail }>{movie.original_language} |  | {movie?.runtime ?? "120"}min</Text>
 
                         <View style={ styles.containerStart }>
 
@@ -74,11 +88,11 @@ export const ViewMovieGenre = ({ movie, genre }) => {
 
                     </View>
 
-                </View>
+                </TouchableOpacity>
             )
         }
         
-    </Pressable>
+    </View>
     
   )
 }

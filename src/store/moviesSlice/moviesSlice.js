@@ -14,7 +14,8 @@ export const moviesSlice = createSlice({
         search:[],
         infoVideos:[],
         cast:[],
-        similarMovie: [],
+        similarMovie:[],
+        savedMovies: []
     },  
     reducers: {
         onSetTopRated: ( state, { payload } ) => {
@@ -55,13 +56,21 @@ export const moviesSlice = createSlice({
             state.similarMovie = payload
         },
         onReset: ( state ) => {
-            state.movieId={},
             state.infoVideos=[],
+            state.moviesGenres= [],
             state.moviesDetails={},
             state.cast=[],
             state.similarMovie=[],
             state.search=[]
         },
+        onSetSavedMovies: ( state, { payload }) => {
+            state.savedMovies = payload
+        },
+        onSetDeleteSavedMovies: ( state, { payload }) => {
+            state.savedMovies = payload
+        },
+        
+
 
     }
 });
@@ -78,5 +87,7 @@ export const {
     onSetInfoVideos,
     onSetCast,
     onSetSimilarMovie,
-    onReset
+    onReset,
+    onSetSavedMovies,
+    onSetDeleteSavedMovies
 } = moviesSlice.actions;

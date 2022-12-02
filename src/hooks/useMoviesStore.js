@@ -14,7 +14,9 @@ import {
   onSetInfoVideos,
   onSetCast,
   onSetSimilarMovie,
-  onReset
+  onReset,
+  onSetSavedMovies,
+  onSetDeleteSavedMovies
 } from '../store/moviesSlice/moviesSlice';
 
 export const useMoviesStore = () => {
@@ -33,7 +35,8 @@ export const useMoviesStore = () => {
         search,
         infoVideos,
         cast,
-        similarMovie
+        similarMovie,
+        savedMovies
       } = useSelector(state => state.movies);
 
       const { API_KEY } = getEnvVariables();
@@ -159,6 +162,16 @@ export const useMoviesStore = () => {
         dispatch( onReset() )
       }
 
+      //* Guardar peliculas
+      const startSavedMovies = movies => {
+        const saved = [...savedMovies, movies]
+        dispatch( onSetSavedMovies( saved ) )
+      }
+
+      const startDeleteSaved = movies => {
+        dispatch( onSetDeleteSavedMovies( movies ))
+      }
+
 
      
 
@@ -175,6 +188,7 @@ export const useMoviesStore = () => {
     infoVideos,
     cast,
     similarMovie,
+    savedMovies,
 
     //Functions
     startGetMovieDB,
@@ -185,6 +199,8 @@ export const useMoviesStore = () => {
     startMoviesGenre,
     startGetSetSearch,
     startReset,
-    startGetInfoVideos
+    startGetInfoVideos,
+    startSavedMovies,
+    startDeleteSaved
   };
 };

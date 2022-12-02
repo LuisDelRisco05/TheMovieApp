@@ -1,36 +1,62 @@
 import { useState } from "react";
-import { Image, Pressable, StyleSheet, Text, TouchableOpacity, View } from "react-native"
+import { Image, LogBox, StyleSheet, Text, TouchableOpacity, View } from "react-native"
 import { useNavigation } from "@react-navigation/native";
 
 import YoutubePlayer from "react-native-youtube-iframe";
 import Icon  from "react-native-vector-icons/Ionicons";
 
-export const VideoYoutube = ({ infoVideos, startReset, moviesDetails }) => {
+import { useMoviesStore } from "../hooks/useMoviesStore";
 
-    const [ watch, setWatch ] = useState(false)
+LogBox.ignoreLogs(['SerializableStateInvariantMiddleware']);
+
+export const VideoYoutube = ({ infoVideos, moviesDetails }) => {
+
+    const [ watch, setWatch ] = useState(false);
+
 
     const navigation =  useNavigation();
 
-    const uri = `https://image.tmdb.org/t/p/w500${ moviesDetails.poster_path }`
+    const { startSavedMovies, startReset } = useMoviesStore();
+
+    const uri = `https://image.tmdb.org/t/p/w500${ moviesDetails.poster_path }`;
+
+    
     
   return (
         <View style={{ paddingTop: 10, backgroundColor: '#1F1C2C', marginHorizontal: 20}}>
-            <Icon 
-                name="arrow-back-outline"
-                size={25}
-                color="#FFF"
-                style={{ width: 50, opacity: 0.6 }}
+
+                <TouchableOpacity
+                    style={{ width: 50, opacity: 0.6 }}
+                    onPress={ () => {
+                        navigation.goBack()
+                        startReset()
+                    }}
+                >
+                <Icon 
+                    name="arrow-back-outline"
+                    size={25}
+                    color="#FFF"
+                    
+                />
+            </TouchableOpacity>
+
+            <TouchableOpacity
+                style={{ right: 20, position: 'absolute', marginTop: 15, opacity: 0.8 }} 
                 onPress={ () => {
-                    navigation.goBack()
+                    console.log('press');
+                    startSavedMovies( moviesDetails )
                     startReset()
+                    navigation.navigate('AllScreen') 
                 }}
-            />
-            <Icon 
-                name="bookmark-outline"
-                size={20}
-                color="#FFF"
-                style={{ right: 20, position: 'absolute', marginTop: 15, opacity: 0.8 }}
-            /> 
+                activeOpacity={ 0.8 }
+            >
+                <Icon 
+                    name="bookmark-outline"
+                    size={20}
+                    color="#FFF"
+                    
+                />    
+            </TouchableOpacity> 
             
 
             <View 
@@ -54,7 +80,7 @@ export const VideoYoutube = ({ infoVideos, startReset, moviesDetails }) => {
                                     size={ 15 }
                                     color="#FFCE31"
                                 />
-                                <Text style={{ color: '#FFF', marginLeft: 3}}>{moviesDetails.vote_average}</Text>
+                                <Text style={{ color: '#FFF', marginLeft: 3}}>{(moviesDetails?.vote_average ?? '').toString().slice(0,1)}</Text>
 
                                 </View>
 

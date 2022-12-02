@@ -1,4 +1,4 @@
-import { Image, Pressable, StyleSheet, Text, View } from "react-native"
+import { Image, Pressable, StyleSheet, Text, TouchableOpacity, View } from "react-native"
 import { useNavigation } from "@react-navigation/native";
 
 import Icon  from 'react-native-vector-icons/Ionicons';
@@ -16,7 +16,7 @@ export const ListMedium = ({ movie }) => {
 
   return (
 
-            <Pressable 
+            <TouchableOpacity 
                 onPress={ () => {
                     navigation.navigate( 'DetailsScreen', movie )
                     startGetMovieId(movie.id)
@@ -45,7 +45,9 @@ export const ListMedium = ({ movie }) => {
                                         size={ 9 }
                                         color="#FFCE31"
                                     />
-                                    <Text style={{ color: '#FFF', marginLeft: 3, fontSize: 8.5 }}>{movie.vote_average}</Text>
+                                    <Text style={{ color: '#FFF', marginLeft: 3, fontSize: 8.5 }}>
+                                        {(movie.vote_average).toString().slice(0, 1)}
+                                    </Text>
 
                                 </View>
 
@@ -63,7 +65,7 @@ export const ListMedium = ({ movie }) => {
                         </View>
                     )
                 }
-            </Pressable>
+            </TouchableOpacity>
   )
 }
 

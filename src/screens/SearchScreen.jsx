@@ -5,7 +5,8 @@ import { useMoviesStore } from "../hooks/useMoviesStore";
 
 export const SearchScreen = () => {
 
-    const { search, startGetSetSearch} = useMoviesStore();
+
+  const { search, startGetSetSearch} = useMoviesStore();
 
   return (
 
@@ -24,7 +25,7 @@ export const SearchScreen = () => {
           />
          
           <Pressable 
-            style={ styles.iconCancel }
+            style={ styles.btn }
             onPress={ () => {
               
             }}
@@ -75,7 +76,7 @@ const styles = StyleSheet.create({
     zIndex: 5,
     width: 30,
   },
-  iconCancel: {
+  btn: {
     position: 'absolute',
     top: 55,
     right: 20,
