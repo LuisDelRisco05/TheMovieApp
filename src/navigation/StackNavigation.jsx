@@ -1,6 +1,7 @@
 import { NavigationContainer, DarkTheme } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
-import { HomeScreen } from '../screens'
+import { DetailsScreen, MoviesGenresScreen } from '../screens'
+import BottomTab from './BottomTab'
 
 
 
@@ -23,7 +24,10 @@ export const StackNavigation = () => {
            }} 
         >
       
-          <stack.Screen name="HomeScreen" component={ HomeScreen } />   
+          <stack.Screen name="BottomTab" component={ BottomTab } />
+          <stack.Screen name="MoviesGenresScreen" component={ MoviesGenresScreen } />
+          <stack.Screen name="DetailsScreen" component={ DetailsScreen } />
+
 
         </stack.Navigator>
 

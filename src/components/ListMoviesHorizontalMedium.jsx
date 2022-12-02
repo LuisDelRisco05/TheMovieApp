@@ -41,7 +41,7 @@ export const ListMoviesHorizontalMedium = ({ movie, title }) => {
 const styles = StyleSheet.create({
   title: {
     color: '#E2E2E2', 
-    fontWeight: '600', 
+    fontWeight: '500', 
     marginLeft: 20,
     fontSize: 17,
     marginBottom: 5, 

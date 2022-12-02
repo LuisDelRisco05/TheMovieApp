@@ -1,17 +1,32 @@
 import { useEffect } from "react"
 import { Text, View, StyleSheet } from "react-native"
 
-import { CarouselMovie, Filter, GenresOptions, ListMoviesHorizontalMedium, ListMoviesHorizontalSmall } from "../components";
-import { Loading } from "../components/Loading";
-import { useMoviesStore } from "../hooks/useMoviesStore";
-
-
+import { Loading } from "../components/Loading"
+import { useMoviesStore } from "../hooks/useMoviesStore"
+import { CarouselMovie, 
+  Filter, GenresOptions, 
+  ListMoviesHorizontalMedium, 
+  ListMoviesHorizontalSmall 
+} from "../components"
 
 
 
 export const HomeScreen = () => {
 
-  const { loading, topRated, popular, youMayLike, startGetMovieDB, startGetMoviePopular, startGetYouMayLike } = useMoviesStore()
+  const {
+    loading,
+    topRated,
+    popular,
+    youMayLike,
+    activeGenre,
+    startGetMovieDB,
+    startGetMoviePopular,
+    startGetYouMayLike,
+    startActiveGenre,
+    startMoviesGenre
+  } = useMoviesStore();
+
+  
 
     useEffect(() => {
       const getMovie = async() => {
@@ -28,7 +43,7 @@ export const HomeScreen = () => {
 
       // <ScrollView>
 
-        <View style={{ flex: 1 }}>
+        <View style={{ flex: 1, backgroundColor: '#1F1C2C' }}>
         
 
           {
@@ -43,7 +58,11 @@ export const HomeScreen = () => {
 
                   <Text style={ styles.user}>Hi, Luis</Text>
 
-                  <GenresOptions />
+                  <GenresOptions 
+                    activeGenre={ activeGenre} 
+                    startActiveGenre={ startActiveGenre } 
+                    startMoviesGenre={ startMoviesGenre }
+                  />
 
                   <Filter />
 
@@ -52,6 +71,7 @@ export const HomeScreen = () => {
                   <ListMoviesHorizontalMedium movie={ popular } title="Popular" />
 
                   <ListMoviesHorizontalSmall movie={ youMayLike } title="You may like" />
+  
   
                  
                 </View>

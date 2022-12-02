@@ -1,16 +1,23 @@
+import { useNavigation } from "@react-navigation/native"
 import { useState } from "react"
 import { Pressable, StyleSheet, Text, View } from "react-native"
+import { useGenres } from "../hooks/useGenres"
 
 
-export const GenresOptions = () => {
 
-    const [ active, setActive ] = useState(1);
+export const GenresOptions = ({ activeGenre, startActiveGenre, startMoviesGenre }) => {
+
+    const navigation = useNavigation()
+
+    const { action, comedy, horror } = useGenres()
+
+    
 
     const options = [
-        { id: 1, genre:'All' },
-        { id: 2, genre:'Action' },
-        { id: 3, genre:'Comedy' },
-        { id: 4, genre:'Horror' },
+        { id: 0,  name:'All' },
+        { id: 28, name:'Action' },
+        { id: 35, name:'Comedy' },
+        { id: 27, name:'Horror' },
     ]
     
 
@@ -22,10 +29,14 @@ export const GenresOptions = () => {
                 <Pressable 
                     key={ opc.id }
                     style={styles.optionBtn }
-                    onPress={ () => setActive(opc.id)}
+                    onPress={ () =>{ 
+                        startActiveGenre(opc.id)
+                        startMoviesGenre({ action, comedy, horror, opc: opc.id })
+                        navigation.navigate('MoviesGenresScreen', opc.name )
+                    }}
                 >
-                    <View style={ active === opc.id && styles.select }>
-                        <Text style={ styles.title }>{opc.genre}</Text>
+                    <View style={ activeGenre === opc.id && styles.select }>
+                        <Text style={ styles.title }>{opc.name}</Text>
                     </View>
                 </Pressable>
             ))}

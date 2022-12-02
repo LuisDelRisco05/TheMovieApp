@@ -1,66 +1,87 @@
-import { Image, StyleSheet, Text, View } from "react-native"
+import { Image, Pressable, StyleSheet, Text, View } from "react-native"
+import { useNavigation } from "@react-navigation/native";
+
 import Icon  from 'react-native-vector-icons/Ionicons';
 
+import { useMoviesStore } from '../hooks/useMoviesStore';
+
 export const ListSmall = ({ movie }) => {
+
+    const navigation = useNavigation();
+
+    const { startGetMovieId } = useMoviesStore();
 
 
     const uri = `https://image.tmdb.org/t/p/w500${ movie.poster_path }`
 
   return (
-        <View style={ styles.container }>
+            <Pressable 
+                onPress={ () => {
+                    navigation.navigate( 'DetailsScreen', movie )
+                    startGetMovieId(movie.id)
+                }}
+                style={{ borderRadius: 18 }}
+            >
+                {
+                    movie?.poster_path && 
+                    (
+                        <View style={ styles.container }>
 
-            <Image    
-                source={{ uri }}
-                style={ styles.img }
-                resizeMode='stretch'
-            />
+                            <Image    
+                                source={{ uri }}
+                                style={ styles.img }
+                                resizeMode='stretch'
+                            />
 
-            <View style={ styles.containerInfo }>
+                            <View style={ styles.containerInfo }>
 
-                <Text style={ styles.title }>{movie.title}</Text>
+                                <Text style={ styles.title }>{movie.title}</Text>
 
-                <View style={ styles.containerStart }>
+                                <View style={ styles.containerStart }>
 
-                    <Icon 
-                        name="star-sharp"
-                        size={ 9 }
-                        color="#FFCE31"
-                    />
-                    <Text style={{ color: '#FFF', marginLeft: 3, fontSize: 8.5 }}>{movie.vote_average}</Text>
+                                    <Icon 
+                                        name="star-sharp"
+                                        size={ 9 }
+                                        color="#FFCE31"
+                                    />
+                                    <Text style={{ color: '#FFF', marginLeft: 3, fontSize: 8.5 }}>{movie.vote_average}</Text>
 
-                </View>
+                                </View>
 
-                <View style={ styles.colorPlay } />
-                    
-                    <Icon 
-                        name="play-circle-sharp"
-                        size={ 25 }
-                        color="#FFF"
-                        style={ styles.iconPlay }
-                    />
+                                <View style={ styles.colorPlay } />
+                                    
+                                    <Icon 
+                                        name="play-circle-sharp"
+                                        size={ 25 }
+                                        color="#FFF"
+                                        style={ styles.iconPlay }
+                                    />
 
-            </View>
+                            </View>
 
-        </View>
+                        </View>
+                    )
+                }
+            </Pressable>
   )
 }
 
 const styles = StyleSheet.create({
     container:{
-        justifyContent: 'center',
         marginTop: 5,
-        marginBottom: 25
+        marginBottom: 25, 
+        paddingLeft: 5
     },
     img:{
         borderRadius: 20,
         height: 110, 
         width: 120, 
-        marginHorizontal: 20
+        marginHorizontal: 10
     },
     containerInfo: {
         position: 'absolute',
         bottom: 2,
-        right: 25,
+        right: 15,
         width: 110,
         height: 35,
         backgroundColor:'#7E7C84',
@@ -71,7 +92,7 @@ const styles = StyleSheet.create({
     title: {
         color: '#FFF',
         fontSize: 6.5,
-        fontWeight: '700',
+        fontWeight: '600',
         left: 10,
         top: 4,
         width: 70

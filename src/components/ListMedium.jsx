@@ -1,47 +1,69 @@
-import { Image, StyleSheet, Text, View } from "react-native"
+import { Image, Pressable, StyleSheet, Text, View } from "react-native"
+import { useNavigation } from "@react-navigation/native";
+
 import Icon  from 'react-native-vector-icons/Ionicons';
 
+import { useMoviesStore } from '../hooks/useMoviesStore';
+
 export const ListMedium = ({ movie }) => {
+
+    const navigation = useNavigation();
+
+    const { startGetMovieId } = useMoviesStore();
 
 
     const uri = `https://image.tmdb.org/t/p/w500${ movie.poster_path }`
 
   return (
-        <View style={ styles.container }>
 
-            <Image    
-                source={{ uri }}
-                style={ styles.img }
-                resizeMode='stretch'
-            />
+            <Pressable 
+                onPress={ () => {
+                    navigation.navigate( 'DetailsScreen', movie )
+                    startGetMovieId(movie.id)
+                }}
+                style={{ borderRadius: 18 }}
+            >
+                {
+                    movie?.poster_path && 
+                    (
+                        <View style={ styles.container }>
 
-            <View style={ styles.containerInfo }>
+                            <Image    
+                                source={{ uri }}
+                                style={ styles.img }
+                                resizeMode='stretch'
+                            />
 
-                <Text style={ styles.title }>{movie.title}</Text>
+                            <View style={ styles.containerInfo }>
 
-                <View style={ styles.containerStart }>
+                                <Text style={ styles.title }>{movie.title}</Text>
 
-                    <Icon 
-                        name="star-sharp"
-                        size={ 9 }
-                        color="#FFCE31"
-                    />
-                    <Text style={{ color: '#FFF', marginLeft: 3, fontSize: 8.5 }}>{movie.vote_average}</Text>
+                                <View style={ styles.containerStart }>
 
-                </View>
+                                    <Icon 
+                                        name="star-sharp"
+                                        size={ 9 }
+                                        color="#FFCE31"
+                                    />
+                                    <Text style={{ color: '#FFF', marginLeft: 3, fontSize: 8.5 }}>{movie.vote_average}</Text>
 
-                <View style={ styles.colorPlay } />
-                    
-                    <Icon 
-                        name="play-circle-sharp"
-                        size={ 27 }
-                        color="#FFF"
-                        style={ styles.iconPlay }
-                    />
+                                </View>
 
-            </View>
+                                <View style={ styles.colorPlay } />
+                                    
+                                <Icon 
+                                    name="play-circle-sharp"
+                                    size={ 27 }
+                                    color="#FFF"
+                                    style={ styles.iconPlay }
+                                />
 
-        </View>
+                            </View>
+
+                        </View>
+                    )
+                }
+            </Pressable>
   )
 }
 

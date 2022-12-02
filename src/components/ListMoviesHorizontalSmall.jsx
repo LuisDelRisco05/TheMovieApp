@@ -1,6 +1,4 @@
-import { FlatList, Image, StyleSheet, Text, View } from "react-native"
-
-import Icon  from 'react-native-vector-icons/Ionicons';
+import { FlatList, StyleSheet, Text } from "react-native"
 
 import { ListSmall } from "./ListSmall"
 
@@ -11,17 +9,8 @@ export const ListMoviesHorizontalSmall = ({ movie, title }) => {
   return (
 
         <>
-            <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-              <Text style={ styles.title }>{title}</Text>
-
-              <Icon 
-                name="ellipsis-horizontal"
-                size={ 20 }
-                color="#FF722A"
-                style={ styles.icon }
-              />
-
-            </View>
+           
+            <Text style={ styles.title }>{title}</Text>
 
 
             <FlatList 
@@ -43,12 +32,9 @@ export const ListMoviesHorizontalSmall = ({ movie, title }) => {
 const styles = StyleSheet.create({
   title: {
     color: '#E2E2E2', 
-    fontWeight: '600', 
+    fontWeight: '500', 
     marginLeft: 20,
-    fontSize: 17,
+    fontSize: 15,
     marginBottom: 5
   },
-  icon:{
-    right: 25,
-  }
 });

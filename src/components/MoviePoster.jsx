@@ -1,6 +1,7 @@
 import { useNavigation } from '@react-navigation/native'
 import { Text, Image, StyleSheet, Pressable, View } from 'react-native'
 import Icon  from 'react-native-vector-icons/Ionicons';
+import { useMoviesStore } from '../hooks/useMoviesStore';
 
 
 
@@ -8,15 +9,17 @@ export const MoviePoster = ({ movie }) => {
 
   const navigation = useNavigation();
 
+  const { startGetMovieId } = useMoviesStore();
 
   const uri = `https://image.tmdb.org/t/p/w500${ movie.poster_path }`
+
 
   return (
     
       <Pressable 
         onPress={ () => {
-          // navigation.navigate( 'DetailsScreen', movie )
-          // startGetMovieId(movie.id)
+          navigation.navigate( 'DetailsScreen', movie )
+          startGetMovieId(movie.id)
         }}
         style={{ borderRadius: 18 }}
       >
@@ -24,10 +27,12 @@ export const MoviePoster = ({ movie }) => {
           movie?.poster_path && 
             (
                 <View style={{ height: 250 }}>
-                    <Image 
+                    <Image
+                      
                       source={{ uri }}
                       style={ styles.img }
                       resizeMode='stretch'
+                      
                     />
                     <View style={ styles.containerInfo }>
 
