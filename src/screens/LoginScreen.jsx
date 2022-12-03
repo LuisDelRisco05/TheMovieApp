@@ -1,13 +1,90 @@
-import { useState } from "react";
-import { StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native"
+import { useEffect, useState } from "react";
+import { Alert, Keyboard, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native"
 
 import Icon from 'react-native-vector-icons/Ionicons';
 import LinearGradient from 'react-native-linear-gradient';
+import { useForm } from "../hooks/useForm";
+import { useAuthStore } from "../hooks/useAuthStore";
+import { asyncStorage } from "../helpers/asyncStorage";
 
 
 export const LoginScreen = ({ navigation }) => {
 
   const [ hidePassword, setHidePassword] = useState(true)
+
+  const { users, startLogin } = useAuthStore();
+
+  const { saveUserStorage, getUserStorage } = asyncStorage();
+
+  const { email, password, onChange, form } = useForm({
+    email:'',
+    password:''
+  })
+
+  useEffect(() => {
+   
+    getUserStorage() 
+    // console.log('se ejecuto effect getUserStorage');
+
+  }, [])
+
+  useEffect(() => {
+
+    if(users.length > 0) {   
+        saveUserStorage(users)
+        // console.log('se ejecuto effect saveUser', users);
+    }
+
+  }, [users])
+
+  const onLogIn = () => {
+    Keyboard.dismiss();
+
+    if( Object.values( form ).includes('') ){ 
+      Alert.alert(
+        'Error', 
+        'All fields are required',
+        [{ text: 'I get it!'}]
+      )
+      return
+    } 
+
+   const user = users.find( u => u.email === form.email)
+
+
+    if(user === undefined){
+
+      Alert.alert(
+        'Error', 
+        'user does not exist',
+        [{ text: 'I get it!'}]
+      )
+      return
+    }
+
+    if(user.email !== form.email){
+        Alert.alert(
+          'Error', 
+          'The email or password is not correct',
+          [{ text: 'I get it!'}]
+        )
+      return
+    }
+
+    if(user.password !== form.password){
+        Alert.alert(
+          'Error', 
+          'The email or password is not correct',
+          [{ text: 'I get it!'}]
+        )
+      return
+    }
+    
+
+    startLogin(user)
+    navigation.replace('BottomTab')
+
+  }
 
   return (
     <View style={{ paddingHorizontal: 20}}>
@@ -15,8 +92,9 @@ export const LoginScreen = ({ navigation }) => {
         <View style={{ flexDirection: 'row'}}>
 
           <TouchableOpacity
+            activeOpacity={ 0.8 }
             style={ styles.arrow }
-            onPress={ () => navigation.goBack()}
+            onPress={ () => navigation.navigate('RegisterScreen')}
           >
             <Icon 
               name="arrow-back-outline"
@@ -65,20 +143,24 @@ export const LoginScreen = ({ navigation }) => {
             placeholderTextColor='#FFF'
             cursorColor='#FFF'
             style={ styles.textInput }
-            onChangeText={ () => {}}
+            onChangeText={ value => onChange( 'email', value ) }
             keyboardType="email-address"
+            value={ email }
+            autoCapitalize="none"
+            autoComplete="off"
           />
 
           <Text style={ styles.title }>Password</Text>
 
           <TextInput 
-            placeholder="Enter your email"
+            placeholder="Enter your password"
             placeholderTextColor='#FFF'
             cursorColor='#FFF'
             style={ styles.textInput }
-            onChangeText={ () => {}}
             secureTextEntry={ hidePassword }
-            autoComplete="password" 
+            onChangeText={ value => onChange( 'password', value ) }
+            value={ password }
+            autoCapitalize="none"
           />
 
           <Icon
@@ -92,23 +174,36 @@ export const LoginScreen = ({ navigation }) => {
         </View>
    
           {/* Btn gradient */}
-          <LinearGradient 
-            start={{x: 0, y: 0}} 
-            end={{x: 1, y: 0}} 
-            colors={['#67657c', '#ff8e54']}
-            style={ styles.btn }
+          <TouchableOpacity 
+            onPress={ onLogIn } 
+            activeOpacity={ 0.8 }
+            style={{ top: 120 }}
           >
+            <LinearGradient 
+              start={{x: 0, y: 0}} 
+              end={{x: 1, y: 0}} 
+              colors={['#67657c', '#ff8e54']}
+              style={ styles.btn }
+            >
 
-            <Text style={{ color: '#FFF', fontSize: 18, fontWeight: '700' }}>Log in</Text>
+              <Text style={{ color: '#FFF', fontSize: 18, fontWeight: '700' }}>Log in</Text>
 
-          </LinearGradient>
+            </LinearGradient>
+          </TouchableOpacity>
 
           <View style={ styles.containerFooter }>
+
             <Text style={{ ...styles.footer, color: '#9C9C9C' }}>Don't have an account?</Text>
-            <Text
-              onPress={ () => navigation.navigate('RegisterScreen')}
-             style={{ ...styles.footer, color: '#FFF', marginLeft: 3 }}
-            >Sign up</Text>
+
+            <TouchableOpacity 
+                activeOpacity={ 0.8 }
+                onPress={ () => navigation.navigate('RegisterScreen')}
+              >
+
+              <Text style={{ ...styles.footer, color: '#FFF', marginLeft: 3 }}>Sign up</Text>
+
+            </TouchableOpacity>
+
           </View>
 
     </View>
@@ -152,11 +247,10 @@ const styles = StyleSheet.create({
     top: 16
   },
   btn: {
-    top: 120,
     height: 45,
     borderRadius: 10,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   containerFooter:{
     top: 240,

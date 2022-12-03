@@ -17,7 +17,7 @@ import {
   onReset,
   onSetSavedMovies,
   onSetDeleteSavedMovies
-} from '../store/moviesSlice/moviesSlice';
+} from '../store/movies/moviesSlice';
 
 export const useMoviesStore = () => {
 

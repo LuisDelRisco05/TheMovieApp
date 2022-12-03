@@ -1,8 +1,11 @@
-import { Text, View, StyleSheet, Image } from "react-native";
+import { Text, View, StyleSheet, Image, TouchableOpacity } from "react-native";
 
 import Icon  from 'react-native-vector-icons/Ionicons';
 
 import { OptionsProfile } from "../components";
+import { useAuthStore } from "../hooks/useAuthStore";
+
+
 
 const options = [
   {
@@ -26,7 +29,10 @@ const options = [
 ];
 
 
-export const ProfileScreen = () => {
+export const ProfileScreen = ({ navigation }) => {
+
+  const { user } = useAuthStore();
+
   return (
     <View style={{ flex: 1, backgroundColor: '#1F1C2C' }}>
 
@@ -39,9 +45,8 @@ export const ProfileScreen = () => {
               style={ styles.img }
             />
 
-            <View style={{ right: 5}}>
-              <Text style={ styles.name }>Luis Felipe</Text>
-              <Text style={ styles.lastName }>Del Risco</Text>
+            <View style={ styles.containerName }>
+              <Text style={ styles.name }>{user.name}</Text>
             </View>
 
           </View>
@@ -74,7 +79,11 @@ export const ProfileScreen = () => {
             }
         </View>
 
-        <View style={ styles.containerSignOut }>
+        <TouchableOpacity 
+          onPress={ () => navigation.replace('LoginScreen') }
+          activeOpacity={0.8} 
+          style={ styles.containerSignOut }
+        >
 
           <Icon 
             name="exit-outline"
@@ -84,7 +93,7 @@ export const ProfileScreen = () => {
           />
 
           <Text style={{ color: '#FFF', fontSize: 14 }}>Sign Out</Text>
-        </View>
+        </TouchableOpacity>
         
 
           
@@ -95,54 +104,62 @@ export const ProfileScreen = () => {
 }
 
 const styles = StyleSheet.create({
-  container: { 
+  container: {
     height: 200,
     top: 40,
-    flexDirection: 'row'
+    flexDirection: 'row',
   },
   containerPhoto: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   img: {
     width: 100,
     height: 100,
-    borderRadius: 50
+    borderRadius: 50,
+  },
+  containerName: {
+    left: 65, 
+    width: 100, 
+    height: 50,
+    position: 'absolute',
+    bottom: 0, 
   },
   name: {
+    height: 50,
     color: '#FFF',
     fontSize: 15,
-    top: 5
+    top: 5,
   },
   lastName: {
     fontSize: 10,
-    color:'#9C9C9C'
+    color: '#9C9C9C',
   },
   containerJoined: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },
-  separator: { 
-    backgroundColor: 'gray', 
-    height: 70, 
+  separator: {
+    backgroundColor: 'gray',
+    height: 70,
     width: 1,
-    top: 50
+    top: 50,
   },
   join: {
     fontSize: 12,
-    color:'#9C9C9C'
+    color: '#9C9C9C',
   },
   ago: {
     color: '#FFF',
     fontSize: 13,
   },
-  containerOpc : { 
-    height: 300, 
+  containerOpc: {
+    height: 300,
     top: 70,
     justifyContent: 'space-evenly',
-    paddingLeft: 50
+    paddingLeft: 50,
   },
   containerSignOut: {
     backgroundColor: '#7E7C84',
@@ -156,7 +173,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     opacity: 0.7,
     left: 55,
-    marginTop: 100
-  }
-  
-})
+    marginTop: 100,
+  },
+});

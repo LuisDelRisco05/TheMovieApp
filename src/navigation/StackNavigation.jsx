@@ -18,8 +18,8 @@ export const StackNavigation = () => {
             }
           }} 
       >
-        <stack.Screen name="LoginScreen" component={ LoginScreen } />
         <stack.Screen name="RegisterScreen" component={ RegisterScreen } />
+        <stack.Screen name="LoginScreen" component={ LoginScreen } />
         <stack.Screen name="BottomTab" component={ BottomTab } />
         <stack.Screen name="MoviesGenresScreen" component={ MoviesGenresScreen } />
         <stack.Screen name="DetailsScreen" component={ DetailsScreen } />

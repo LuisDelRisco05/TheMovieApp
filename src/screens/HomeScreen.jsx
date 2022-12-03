@@ -3,15 +3,24 @@ import { Text, View, StyleSheet } from "react-native"
 
 import { Loading } from "../components/Loading"
 import { useMoviesStore } from "../hooks/useMoviesStore"
-import { CarouselMovie, 
-  Filter, GenresOptions, 
+import { 
+  CarouselMovie, 
+  Filter, 
+  GenresOptions, 
   ListMoviesHorizontalMedium, 
   ListMoviesHorizontalSmall 
 } from "../components"
+import { useAuthStore } from "../hooks/useAuthStore"
+
+
 
 
 
 export const HomeScreen = () => {
+
+  
+
+  const { user } = useAuthStore();
 
   const {
     loading,
@@ -26,16 +35,16 @@ export const HomeScreen = () => {
     startMoviesGenre
   } = useMoviesStore();
 
-  
+    
 
-    useEffect(() => {
-      const getMovie = async() => {
-        await startGetMovieDB()
-        await startGetMoviePopular()
-        await startGetYouMayLike()
-      }
-      getMovie() 
-    }, [])
+  useEffect(() => {
+    const getMovie = async() => {
+      await startGetMovieDB()
+      await startGetMoviePopular()
+      await startGetYouMayLike()
+    }
+    getMovie() 
+  }, [])
     
     
 
@@ -56,7 +65,7 @@ export const HomeScreen = () => {
             : (
                 <View>
 
-                  <Text style={ styles.user}>Hi, Luis</Text>
+                  <Text style={ styles.user}>Hi, {user.name}</Text>
 
                   <GenresOptions 
                     activeGenre={ activeGenre} 

@@ -1,12 +1,64 @@
-import { useState } from "react";
-import { KeyboardAvoidingView, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native"
+import { useEffect, useState } from "react";
+import { Alert, Keyboard, KeyboardAvoidingView, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native"
 
 import Icon from 'react-native-vector-icons/Ionicons';
 import LinearGradient from 'react-native-linear-gradient';
+import { useForm } from "../hooks/useForm";
+import { useAuthStore } from "../hooks/useAuthStore";
+import { asyncStorage } from "../helpers/asyncStorage";
 
 export const RegisterScreen = ({ navigation }) => {
 
-  const [ hidePassword, setHidePassword] = useState(true)
+  const [ hidePassword, setHidePassword] = useState(true);
+
+  const { saveUserStorage, getUserStorage } = asyncStorage();
+
+  const { users, startSaveUser, startLogin } = useAuthStore();
+
+  const { name, email, password, onChange, form } = useForm({
+    name:'',
+    email:'',
+    password:'',
+    id: Date.now().toString(36)
+  })
+
+  useEffect(() => {
+   
+    getUserStorage() 
+    console.log('se ejecuto effect getUserStorage');
+
+  }, [])
+
+  useEffect(() => {
+
+    if(users.length > 0) {   
+        saveUserStorage(users)
+        console.log('se ejecuto effect saveUser', users);
+    }
+
+  }, [users])
+
+
+  const onSignUp = () => {  
+    console.log('press in Register');
+    
+    Keyboard.dismiss();
+
+
+    if( Object.values( form ).includes('') ){ 
+      Alert.alert('Error', 
+        'All fields are required',
+        [{ text: 'I get it!'}]
+        )
+
+      return
+    } 
+
+    startSaveUser(form);
+    // startLogin(form)
+
+    navigation.replace('LoginScreen');
+  }
 
 
   return (
@@ -19,8 +71,9 @@ export const RegisterScreen = ({ navigation }) => {
         <View style={{ flexDirection: 'row'}}>
 
           <TouchableOpacity
+            activeOpacity={ 0.8 }
             style={ styles.arrow }
-            onPress={ () => navigation.goBack()}
+            onPress={ () => navigation.navigate('LoginScreen') }
           >
             <Icon 
               name="arrow-back-outline"
@@ -60,16 +113,20 @@ export const RegisterScreen = ({ navigation }) => {
           </View>
         </View>
 
+        {/* Formulario registro */}
         <View style={{ height: 390, top: 80 }}>
 
           <Text style={ styles.title }>Name</Text>
 
           <TextInput 
-            placeholder="Enter your email"
+            placeholder="Enter your name"
             placeholderTextColor='#FFF'
             cursorColor='#FFF'
             style={ styles.textInput }
-            onChangeText={ () => {}}
+            onChangeText={ value => onChange( 'name', value ) }
+            autoComplete='off'
+            autoCapitalize="words"
+            value={name}
           />
 
           <Text style={ styles.title }>Email</Text>
@@ -79,20 +136,23 @@ export const RegisterScreen = ({ navigation }) => {
             placeholderTextColor='#FFF'
             cursorColor='#FFF'
             style={ styles.textInput }
-            onChangeText={ () => {}}
+            onChangeText={ value => onChange( 'email', value ) }
             keyboardType="email-address"
+            autoComplete='off'
+            value={ email }
+            autoCapitalize="none"
           />
 
           <Text style={ styles.title }>Password</Text>
 
           <TextInput 
-            placeholder="Enter your email"
+            placeholder="Enter your password"
             placeholderTextColor='#FFF'
             cursorColor='#FFF'
             style={ styles.textInput }
-            onChangeText={ () => {}}
+            onChangeText={ value => onChange( 'password', value ) }
             secureTextEntry={ hidePassword }
-            autoComplete="password" 
+            value={ password }
           />
 
           <Icon
@@ -106,25 +166,35 @@ export const RegisterScreen = ({ navigation }) => {
         </View>
    
           {/* Btn gradient */}
-          <View style={{ height: 300}}>
-            <LinearGradient 
-              start={{x: 0, y: 0}} 
-              end={{x: 1, y: 0}} 
-              colors={['#67657c', '#ff8e54']}
-              style={ styles.btn }
-            >
+          <View style={{ height: 300 }}>
+
+            <TouchableOpacity onPress={ onSignUp } activeOpacity={ 0.8 }>
+              <LinearGradient 
+                start={{x: 0, y: 0}} 
+                end={{x: 1, y: 0}} 
+                colors={['#67657c', '#ff8e54']}
+                style={ styles.btn }
+              >
 
               <Text style={{ color: '#FFF', fontSize: 18, fontWeight: '700' }}>Create Account</Text>
 
-            </LinearGradient>
+              </LinearGradient>
+            </TouchableOpacity>
 
             <View style={ styles.containerFooter }>
               <Text style={{ ...styles.footer, color: '#9C9C9C' }}>Don't have an account?</Text>
-              <Text 
+
+              <TouchableOpacity 
+                activeOpacity={ 0.8 }
                 onPress={ () => navigation.navigate('LoginScreen')}
-                style={{ ...styles.footer, color: '#FFF', marginLeft: 3 }}
-              >Login</Text>
+              >
+
+                <Text style={{ ...styles.footer, color: '#FFF', marginLeft: 3 }}>Login</Text>
+
+              </TouchableOpacity>
+
             </View>
+
           </View>
 
         </ScrollView>
@@ -132,6 +202,8 @@ export const RegisterScreen = ({ navigation }) => {
     </KeyboardAvoidingView>
   )
 }
+
+
 
 const styles = StyleSheet.create({
   network: {
