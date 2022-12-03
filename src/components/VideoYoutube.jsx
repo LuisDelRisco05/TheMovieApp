@@ -25,17 +25,17 @@ export const VideoYoutube = ({ infoVideos, moviesDetails }) => {
   return (
         <View style={{ paddingTop: 10, backgroundColor: '#1F1C2C', marginHorizontal: 20}}>
 
-                <TouchableOpacity
-                    style={{ width: 50, opacity: 0.6 }}
-                    onPress={ () => {
-                        navigation.goBack()
-                        startReset()
-                    }}
-                >
+            <TouchableOpacity
+                style={{ width: 50, opacity: 0.6 }}
+                onPress={ () => {
+                    navigation.goBack()
+                    startReset()
+                }}
+            >
                 <Icon 
-                    name="arrow-back-outline"
-                    size={25}
-                    color="#FFF"
+                  name="arrow-back-outline"
+                  size={25}
+                  color="#FFF"
                     
                 />
             </TouchableOpacity>

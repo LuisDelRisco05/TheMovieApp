@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
         fontWeight: '700',
         left: 10,
         top: 10, 
-        width: 140
+        width: 140,
     },
     iconPlay: {
        position: 'absolute',
@@ -151,10 +151,11 @@ const styles = StyleSheet.create({
     detail: {
         color: '#99989B',
         fontSize: 10.5, 
-        top: 30,
+        bottom: 38,
         width: 120,
         left: 10,
-        textTransform : 'uppercase'
+        textTransform : 'uppercase',
+        position: 'absolute'
     },
     shadow: {
         height: 30.5,

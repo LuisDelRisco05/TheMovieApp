@@ -15,14 +15,14 @@ export const SearchScreen = () => {
         <Text style={ styles.user}>Hi, Luis</Text>
 
         <TextInput 
-            placeholder="Seach movies"
-            placeholderTextColor='#BFBFC2'
-            cursorColor='#FFF'
-            style={ styles.searchInput }
-            onChangeText={ (keyword) => {
-              startGetSetSearch(keyword)
-            }}
-          />
+          placeholder="Seach movies"
+          placeholderTextColor='#BFBFC2'
+          cursorColor='#FFF'
+          style={ styles.searchInput }
+          onChangeText={ (keyword) => {
+            startGetSetSearch(keyword)
+          }}
+        />
          
           <Pressable 
             style={ styles.btn }
