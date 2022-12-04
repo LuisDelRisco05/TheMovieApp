@@ -21,7 +21,6 @@ export const ListSmall = ({ movie }) => {
                     navigation.navigate( 'DetailsScreen', movie )
                     startGetMovieId(movie.id)
                 }}
-                style={{ borderRadius: 18 }}
             >
                 {
                     movie?.backdrop_path && 
@@ -77,20 +76,19 @@ const styles = StyleSheet.create({
     },
     img:{
         borderRadius: 20,
-        height: 110, 
-        width: 120, 
+        height: 108, 
+        width: 125, 
         marginHorizontal: 10
     },
     containerInfo: {
         position: 'absolute',
         bottom: 2,
         right: 15,
-        width: 110,
+        width: 114,
         height: 35,
-        backgroundColor:'#A9A9A9',
+        backgroundColor:'rgba(255, 255, 255, 0.2)',
         borderRadius: 20,
-        opacity: 0.7,
-        
+        left: 23        
       },
     title: {
         color: '#FFF',

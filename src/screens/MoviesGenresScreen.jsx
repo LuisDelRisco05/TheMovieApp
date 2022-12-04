@@ -31,7 +31,7 @@ export const MoviesGenresScreen = ({ route, navigation }) => {
                 color="#FFF"
                 style={ styles.back }
                 onPress={ () => {
-                  navigation.goBack()
+                  navigation.navigate('HomeScreen')
                   startActiveGenre(0)
                 }}
               />

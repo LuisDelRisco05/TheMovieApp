@@ -16,8 +16,8 @@ export const Filter = () => {
 const styles = StyleSheet.create({
     container: { 
         position: 'absolute', 
-        top: 55, 
-        right: 20,
+        top: 60, 
+        right: 28,
         width: 30,
         height: 30,
         justifyContent: 'center',

@@ -92,7 +92,7 @@ export const ProfileScreen = ({ navigation }) => {
             style={{ marginRight: 5}}
           />
 
-          <Text style={{ color: '#FFF', fontSize: 14 }}>Sign Out</Text>
+          <Text style={{ color: '#FFF', fontSize: 18, fontWeight: '400' }}>Sign Out</Text>
         </TouchableOpacity>
         
 
@@ -157,22 +157,22 @@ const styles = StyleSheet.create({
   },
   containerOpc: {
     height: 300,
-    top: 70,
+    top: 35,
     justifyContent: 'space-evenly',
-    paddingLeft: 50,
+    marginHorizontal: 42
   },
   containerSignOut: {
-    backgroundColor: '#7E7C84',
-    width: 110,
+    backgroundColor: 'rgba(255, 255, 255, 0.2)',
+    width: 120,
     borderRadius: 30,
     color: '#FFF',
     fontWeight: '600',
-    height: 40,
+    height: 47,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
     opacity: 0.7,
     left: 55,
-    marginTop: 100,
+    marginTop: 50,
   },
 });

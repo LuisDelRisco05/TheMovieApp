@@ -21,7 +21,6 @@ export const ListMedium = ({ movie }) => {
                 startGetMovieId(movie.id)
                 navigation.navigate( 'DetailsScreen', movie )
             }}
-            style={{ borderRadius: 18 }}
         >
             {
                 movie?.backdrop_path && 
@@ -72,24 +71,24 @@ export const ListMedium = ({ movie }) => {
 const styles = StyleSheet.create({
     container:{
         justifyContent: 'center',
-        marginBottom: 25,
+        marginBottom: 15,
         marginTop: 5,
     },
     img:{
-        borderRadius: 20,
+        borderRadius: 25,
         height: 132, 
         marginHorizontal: 20,
         width: 153, 
     },
     containerInfo: {
-        backgroundColor:'#A9A9A9',
+        backgroundColor:'rgba(255, 255, 255, 0.2)',
         borderRadius: 20,
         bottom: 2,
-        height: 35,
-        opacity: 0.7,
+        height: 42,
         position: 'absolute',
         right: 25,
-        width: 145,
+        width: 140,
+        left: 27
         
       },
     title: {

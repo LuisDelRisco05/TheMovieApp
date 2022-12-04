@@ -1,4 +1,4 @@
-import { Text, Image, StyleSheet, Pressable, View } from 'react-native'
+import { Text, Image, StyleSheet, Pressable, View, TouchableOpacity } from 'react-native'
 import { useNavigation } from '@react-navigation/native';
 
 import Icon  from 'react-native-vector-icons/Ionicons';
@@ -18,12 +18,13 @@ export const ViewMovieGenre = ({ movie, genre }) => {
 
 
     
-    <Pressable 
+    <TouchableOpacity 
+        activeOpacity={ 0.8 } 
         onPress={ () => {
             navigation.navigate( 'DetailsScreen', movie )
             startGetMovieId(movie.id)
         }}
-        style={{ borderRadius: 18, flex: 1 }}
+        style={{ flex: 1, paddingHorizontal: 22 }}
     >
         {
         movie?.backdrop_path && 
@@ -78,7 +79,7 @@ export const ViewMovieGenre = ({ movie, genre }) => {
             )
         }
         
-    </Pressable>
+    </TouchableOpacity>
     
   )
 }
@@ -86,19 +87,18 @@ export const ViewMovieGenre = ({ movie, genre }) => {
 
 const styles = StyleSheet.create({
     container: {
-        marginHorizontal: 20, 
-        backgroundColor: '#62606B', 
-        borderRadius: 20,
-        height: 140,
+        backgroundColor: 'rgba(221, 221, 221, 0.2)', 
+        borderRadius: 22,
+        height: 127,
         marginVertical: 20,
         padding: 10,
         flexDirection: 'row',
-        opacity: 0.9 
+        width: 339 
       },
     img: {
-        borderRadius: 20,
-        flex: 1,
-        width: 150,
+        borderRadius: 17,
+        width: 125,
+        height: 108
     },
     containerInfo: {
        width: 200

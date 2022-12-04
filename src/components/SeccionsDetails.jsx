@@ -13,7 +13,7 @@ export const SeccionsDetails = ({ movie, moviesDetails }) => {
 
               <Text style={ styles.title }>{movie.title}</Text>
 
-              <View style={{ alignItems: 'center', marginTop: 5 }}>
+              <View style={{ alignItems: 'center' }}>
                       
                 <Text style={ styles.subtitulo }>
                   {moviesDetails.original_language} | { moviesDetails.genres && moviesDetails.genres[0].name } | {moviesDetails.runtime}m
@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     containerSectionOne: {
       marginHorizontal: 20,
       alignItems: 'center',
-      marginBottom: 30,
+      marginBottom: 15,
     },
     containerSectionTwo: {
       flexDirection: 'row',

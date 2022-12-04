@@ -15,7 +15,7 @@ export const SearchScreen = () => {
 
   return (
 
-    <View style={{ paddingHorizontal: 20, flex: 1, backgroundColor: '#1F1C2C'  }}>
+    <View style={{ paddingLeft: 22, flex: 1, backgroundColor: '#1F1C2C'  }}>
 
         <Text style={ styles.user}>Hi, {user.name}</Text>
 
@@ -37,7 +37,7 @@ export const SearchScreen = () => {
               
             <Icon 
               name="search-outline"
-              size={ 27 }
+              size={ 23 }
               color="#FFF"
               style={ styles.iconSearch }
             />
@@ -70,30 +70,31 @@ const styles = StyleSheet.create({
     marginVertical: 12
   },
   searchInput:{
-    backgroundColor: '#A9A9A9',
-    width: 300,
+    backgroundColor: 'rgba(196, 196, 196, 0.8)',
+    width: 293,
     paddingLeft: 20,
-    borderRadius: 30,
+    borderRadius: 59,
     zIndex: 4,
     color: '#FFF',
     fontWeight: '300',
     marginBottom: 10,
-    opacity: 0.6,
+    opacity: 0.5,
     fontSize: 13,
+    height: 37
   },
   iconSearch:{
-    top: 1,
+    bottom: 1,
     left: 2,
     zIndex: 5,
     width: 30,
   },
   btn: {
     position: 'absolute',
-    top: 61,
-    right: 20,
+    top: 60,
+    right: 30,
     zIndex: 4,
-    height: 40,
-    width: 40,
+    height: 35,
+    width: 35,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#FF722A',

@@ -12,12 +12,12 @@ export const AllScreen = ({ navigation }) => {
 
   return (
 
-    <View style={{ paddingHorizontal: 20, flex: 1, backgroundColor: '#1F1C2C'  }}>
+    <View style={{ flex: 1, backgroundColor: '#1F1C2C'  }}>
 
       <TouchableOpacity
-        style={{ width: 50, top: 28 }}
+        style={{ width: 50, top: 28, left: 18 }}
         onPress={ () => {
-            navigation.navigate('BottomTab')
+          navigation.navigate('HomeScreen')
         }}
       >
       <Icon 
@@ -55,6 +55,6 @@ const styles = StyleSheet.create({
       top: 0,
       marginBottom: 10,
       fontWeight: '600',
-      left: 30
+      left: 40
     }
 });

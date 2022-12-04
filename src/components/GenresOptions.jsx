@@ -51,11 +51,11 @@ const styles = StyleSheet.create({
         height: 40, 
         justifyContent: 'space-between',
         marginBottom: 10,
-        marginLeft: 20,
-        width: 310,
+        marginLeft: 18,
+        width: 290,
     },
     optionBtn: { 
-        height: 20,
+        height: 28,
         justifyContent: 'center',
         width: 60,
     },
@@ -67,9 +67,10 @@ const styles = StyleSheet.create({
     },
     select: {
         backgroundColor: '#FF692B',
-        borderRadius: 20,
-        height: 26,
+        borderRadius: 35,
+        height: 28,
         justifyContent: 'center',
         opacity: 0.4,
+        width: 60,
     }
 })

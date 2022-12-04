@@ -21,12 +21,12 @@ export const MoviePoster = ({ movie }) => {
           navigation.navigate( 'DetailsScreen', movie )
           startGetMovieId(movie.id)
         }}
-        style={{ borderRadius: 18 }}
+        style={{ borderRadius: 39 }}
       >
         {
           movie?.backdrop_path && 
             (
-                <View style={{ height: 250 }}>
+                <View style={{ height: 240 }}>
                     <Image
                       
                       source={{ uri }}
@@ -73,8 +73,8 @@ export const MoviePoster = ({ movie }) => {
 const styles = StyleSheet.create({
   img: {
     borderRadius: 30,
-    height: 210,
-    width: 350,
+    height: 204,
+    width: 340,
   },
   containerInfo: {
     position: 'absolute',
@@ -87,6 +87,7 @@ const styles = StyleSheet.create({
     color: '#FFF',
     fontSize: 16,
     fontWeight: '700',
+    top: 15,
   },
   iconPlay: {
     position: 'absolute',

@@ -7,7 +7,7 @@ import { useMoviesStore } from '../hooks/useMoviesStore';
 
 export const ViewMovieAll = ({ movie  }) => {
 
-    const uri = `https://image.tmdb.org/t/p/w500${ movie.poster_path }`;
+    const uri = `https://image.tmdb.org/t/p/w500${ movie.backdrop_path }`;
 
     const navigation = useNavigation();
 
@@ -24,75 +24,72 @@ export const ViewMovieAll = ({ movie  }) => {
 
 
   return (
-
-
     
-    <View 
-        
-        style={{ borderRadius: 18, flex: 1 }}
-    >
+        <TouchableOpacity
+            activeOpacity={ 0.8 } 
+            onPress={ () => {
+                navigation.navigate( 'DetailsScreen', movie )
+                startGetMovieId(movie.id)
+              
+            }}  
+            style={{ flex: 1, paddingHorizontal: 22 }}
+      >
         {
-        movie?.poster_path && 
+            movie?.backdrop_path && 
             (
-                <TouchableOpacity 
-                    onPress={ () => {
-                        navigation.navigate( 'DetailsScreen', movie )
-                        startGetMovieId(movie.id)
-                    }}  
-                    style={styles.container}
-                >
 
-                    <Image 
-                        source={{ uri }}
-                        style={ styles.img }
-                        resizeMode='stretch'
-                    />
-
-                    <View style={ styles.containerInfo }>
-
-                        <Text style={ styles.title }>{movie.title}</Text>
-
-                        <TouchableOpacity 
-                            onPress={ handleDelete }
-                            style={ styles.save }>
-                            <Icon 
-                                name="close-circle"
-                                color="#FFF"
-                                size={ 20 } 
-                            />
-                        </TouchableOpacity>
-
-                        <Text style={ styles.detail }>{movie.original_language} |  | {movie?.runtime ?? "120"}min</Text>
-
-                        <View style={ styles.containerStart }>
-
-                            <Icon 
-                                name="star-sharp"
-                                size={ 15 }
-                                color="#FFCE31"
-                            />
-                            <Text style={{ color: '#FFF', marginLeft: 3}}>{(movie.vote_average).toString().slice(0, 3)}</Text>
-
-                        </View>
-
-                        <View style={ styles.shadow } />
-
-                        <View style={ styles.colorPlay } />
-                        
-                        <Icon 
-                            name="play-circle-sharp"
-                            size={ 30 }
-                            color="#FFF"
-                            style={ styles.iconPlay }
+                    <View style={styles.container}>
+                        <Image 
+                            source={{ uri }}
+                            style={ styles.img }
+                            resizeMode='cover'
                         />
 
+                        <View style={ styles.containerInfo }>
+
+                            <Text style={ styles.title }>{movie.title}</Text>
+
+                            <TouchableOpacity 
+                                onPress={ handleDelete }
+                                style={ styles.save }>
+                                <Icon 
+                                    name="close-circle"
+                                    color="#FFF"
+                                    size={ 15 } 
+                                />
+                            </TouchableOpacity>
+
+                            <Text style={ styles.detail }>{movie.original_language} |  | {movie?.runtime ?? "120"}min</Text>
+
+                            <View style={ styles.containerStart }>
+
+                                <Icon 
+                                    name="star-sharp"
+                                    size={ 15 }
+                                    color="#FFCE31"
+                                />
+                                <Text style={{ color: '#FFF', marginLeft: 3}}>{(movie.vote_average).toString().slice(0, 3)}</Text>
+
+                            </View>
+
+                            <View style={ styles.shadow } />
+
+                            <View style={ styles.colorPlay } />
+                            
+                            <Icon 
+                                name="play-circle-sharp"
+                                size={ 30 }
+                                color="#FFF"
+                                style={ styles.iconPlay }
+                            />
+                        </View>
                     </View>
 
-                </TouchableOpacity>
             )
         }
+</TouchableOpacity>
         
-    </View>
+    
     
   )
 }
@@ -100,19 +97,18 @@ export const ViewMovieAll = ({ movie  }) => {
 
 const styles = StyleSheet.create({
     container: {
-        marginHorizontal: 20, 
-        backgroundColor: '#62606B', 
-        borderRadius: 20,
-        height: 140,
+        backgroundColor: 'rgba(221, 221, 221, 0.2)', 
+        borderRadius: 22,
+        height: 127,
         marginVertical: 20,
         padding: 10,
         flexDirection: 'row',
-        opacity: 0.9 
+        width: 339 
       },
     img: {
-        borderRadius: 20,
-        flex: 1,
-        width: 150,
+        borderRadius: 17,
+        width: 125,
+        height: 108
     },
     containerInfo: {
        width: 200
@@ -123,7 +119,7 @@ const styles = StyleSheet.create({
         fontWeight: '700',
         left: 10,
         top: 10, 
-        width: 140
+        width: 140,
     },
     iconPlay: {
        position: 'absolute',
@@ -165,10 +161,11 @@ const styles = StyleSheet.create({
     detail: {
         color: '#99989B',
         fontSize: 10.5, 
-        top: 30,
+        bottom: 38,
         width: 120,
         left: 10,
-        textTransform : 'uppercase'
+        textTransform : 'uppercase',
+        position: 'absolute'
     },
     shadow: {
         height: 30.5,

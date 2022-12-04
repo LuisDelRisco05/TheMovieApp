@@ -21,12 +21,12 @@ export const VideoYoutube = ({ infoVideos, moviesDetails, movie }) => {
 
     
   return (
-        <View style={{ paddingTop: 10, backgroundColor: '#1F1C2C', marginHorizontal: 20}}>
+        <View style={{ paddingTop: 10, backgroundColor: '#1F1C2C', marginHorizontal: 18}}>
 
             <TouchableOpacity
                 style={{ width: 50 }}
                 onPress={ () => {
-                    navigation.goBack()
+                    navigation.navigate('HomeScreen')
                     startReset()
                 }}
             >
@@ -57,12 +57,12 @@ export const VideoYoutube = ({ infoVideos, moviesDetails, movie }) => {
             
 
             <View 
-                style={{ borderRadius: 18 }}
+                style={{ width: 340, height: 240  }}
             >
                 {
                     !watch ? 
                     (
-                        <View style={{ height: 250, top: 15 }}>
+                        <View style={{ height: 250, top: 5 }}>
                             <Image 
                                 source={{ uri }}
                                 style={ styles.img }
@@ -88,7 +88,7 @@ export const VideoYoutube = ({ infoVideos, moviesDetails, movie }) => {
                                     <View style={ styles.colorPlay } />
                                     <Icon 
                                         name="play-circle-sharp"
-                                        size={ 52 }
+                                        size={ 35 }
                                         color="#FFF"
                                         style={ styles.iconPlay }
                                     />
@@ -118,9 +118,9 @@ export const VideoYoutube = ({ infoVideos, moviesDetails, movie }) => {
 
 const styles = StyleSheet.create({
     img: {
-        borderRadius: 30,
-        height: 210,
-        width: 350,
+        borderRadius: 39,
+        height: 204,
+        width: 340,
     },
     containerInfo: {
         position: 'absolute',
@@ -136,19 +136,19 @@ const styles = StyleSheet.create({
     },
     containerPlay: {
         position: 'absolute',
-        bottom: 10,
-        right: -20,
+        bottom: 20,
+        right: - 10,
         backgroundColor: '#7E7C84',
-        height: 50,
-        width: 170,
-        borderTopLeftRadius: 25,
-        borderBottomLeftRadius: 25,
+        height: 35,
+        width: 143,
+        borderTopLeftRadius: 20,
+        borderBottomLeftRadius: 20,
         opacity: 0.7
     },
     iconPlay: {
         position: 'absolute',
-        bottom: -3,
-        right: 118,
+        bottom: -2,
+        right: 107,
         borderRadius: 50,
         },
     colorPlay: {
@@ -156,17 +156,17 @@ const styles = StyleSheet.create({
         height: 17,
         width: 16.5,
         position: 'absolute',
-        bottom: 17,
-        right: 137,
+        bottom: 8,
+        right: 117,
         opacity: 0.8,
-        borderRadius: 5
+        borderRadius: 20
     },
     watch: {
-        top: 13,
+        top: 7,
         fontSize: 18,
         color: '#FFF',
-        left: 50,
+        left: 45,
         width: 100,
-        fontWeight: '700'
+        fontWeight: '400'
     }
   });

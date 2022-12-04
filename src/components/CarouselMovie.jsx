@@ -11,13 +11,13 @@ export const CarouselMovie = ({ topRated }) => {
   return (
 
 
-    <View style={{ height: 220, marginBottom: 10 }}>
+    <View style={{ height: 210, marginBottom: 5 }}>
 
           <Carousel
             data={ topRated }
             keyExtractor={ item => item.id }
             renderItem={ ({ item }) => (
-              <View style={{ marginHorizontal: 20}}>
+              <View style={{ marginHorizontal: 18}}>
                 <MoviePoster movie={ item } />
               </View>
             )}

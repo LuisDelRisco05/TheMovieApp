@@ -33,14 +33,14 @@ export const OptionsProfile = ({ text, iconName, iconArrow }) => {
 const styles = StyleSheet.create({
 
       opc: {
-        backgroundColor: '#7E7C84',
-        width: 300,
+        backgroundColor: 'rgba(255, 255, 255, 0.2)',
+        width: 296,
         paddingLeft: 20,
-        borderRadius: 30,
+        borderRadius: 29,
         color: '#FFF',
         fontWeight: '600',
         marginBottom: 10,
-        height: 40,
+        height: 47,
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
       opcText:{
         color: '#FFF',
         right: 40,
-        fontSize: 16,
+        fontSize: 18,
         fontWeight: '500',
         width: 70
       },

@@ -50,7 +50,7 @@ export const DetailsScreen = ({route}) => {
 
                   <View style={{marginHorizontal: 20, height: 70, marginBottom: 20}}>
 
-                    <Text style={{color: '#C5C4C7', fontSize: 15, marginBottom: 5}}>Story line</Text>
+                    <Text style={ styles.title }>Story line</Text>
                     <Text style={{color: '#737278', fontSize: 11, textAlign: 'justify'}}>{moviesDetails.overview}</Text>
 
                   </View>
@@ -59,7 +59,7 @@ export const DetailsScreen = ({route}) => {
 
                   <View style={{ height: 70, marginVertical: 20 }}>
 
-                    <Text style={{ color: '#C5C4C7', fontSize: 15, marginBottom: 5, left: 20 }}>Star cast</Text>
+                    <Text style={{ ...styles.title, marginLeft: 18 }}>Star cast</Text>
 
                     <View style={styles.containerCast}>
 
@@ -114,6 +114,12 @@ const styles = StyleSheet.create({
     marginBottom: 2,
     paddingTop: 10,
   },
+  title: { 
+    color: '#C5C4C7', 
+    fontSize: 14, 
+    marginBottom: 5, 
+    fontWeight: '500' 
+  }
 });
 
 

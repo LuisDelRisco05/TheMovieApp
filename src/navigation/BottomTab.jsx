@@ -11,11 +11,12 @@ const BottomTab = () => {
       <TabBottom.Navigator
         screenOptions={{
           tabBarStyle: {
-            height: 60,
-            width: 300,
-            left: 50,
-            borderRadius: 30,
-            backgroundColor: '#7E7C84',
+            height: 65,
+            width: 310,
+            left: 31,
+            right:34,
+            borderRadius: 59,
+            backgroundColor: 'rgba(196, 196, 196, 0.1)',
             opacity: 0.8,
             marginBottom: 5,
             position: 'absolute',

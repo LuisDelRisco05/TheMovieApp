@@ -13,7 +13,7 @@ export const RegisterScreen = ({ navigation }) => {
 
   const { saveUserStorage, getUserStorage } = asyncStorage();
 
-  const { users, startSaveUser, startLogin } = useAuthStore();
+  const { users, startSaveUser } = useAuthStore();
 
   const { name, email, password, onChange, form } = useForm({
     name:'',
@@ -59,9 +59,9 @@ export const RegisterScreen = ({ navigation }) => {
 
 
   return (
-    <KeyboardAvoidingView style={{ paddingHorizontal: 20, flex: 1 }}>
+    <KeyboardAvoidingView style={{ paddingHorizontal: 22, flex: 1 }}>
 
-      <ScrollView
+      <ScrollView style={{ flex: 1 }}
         showsVerticalScrollIndicator={ false }
       >
 
@@ -84,7 +84,7 @@ export const RegisterScreen = ({ navigation }) => {
 
         </View>
 
-        <View style={{ height: 110, top: 50 }}>
+        <View style={{ height: 120, top: 30 }}>
 
           <Text style={{ color: '#9C9C9C', fontSize: 13, fontWeight: '400' }}>Sign up with one of following options</Text>
 
@@ -111,7 +111,7 @@ export const RegisterScreen = ({ navigation }) => {
         </View>
 
         {/* Formulario registro */}
-        <View style={{ height: 390, top: 80 }}>
+        <View style={{ height: 370, top: 60 }}>
 
           <Text style={ styles.title }>Name</Text>
 
@@ -170,7 +170,7 @@ export const RegisterScreen = ({ navigation }) => {
                 start={{x: 0, y: 0}} 
                 end={{x: 1, y: 0}} 
                 colors={['#67657c', '#ff8e54']}
-                style={ styles.btn }
+                style={{ ...styles.btn }}
               >
 
               <Text style={{ color: '#FFF', fontSize: 18, fontWeight: '700' }}>Create Account</Text>
@@ -205,11 +205,12 @@ export const RegisterScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   network: {
     backgroundColor: '#7E7C84',
-    width: 165,
+    width: 158,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 7,
-    opacity: 0.6
+    opacity: 0.6,
+    height: 57
   },
   textInput:{
     backgroundColor: '#7E7C84',
@@ -229,7 +230,7 @@ const styles = StyleSheet.create({
     fontSize: 18 
   },
   icon:{
-    bottom: 100,
+    bottom: 80,
     right: 12,
     zIndex: 5,
     position: 'absolute',
@@ -239,14 +240,14 @@ const styles = StyleSheet.create({
     top: 16
   },
   btn: {
-    top: 50,
+    top: 35,
     height: 45,
     borderRadius: 10,
     justifyContent: 'center',
     alignItems: 'center',
   },
   containerFooter:{
-    top: 100,
+    top: 75,
     flexDirection: 'row',
     justifyContent:'center'
   },
