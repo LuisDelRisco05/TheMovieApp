@@ -11,12 +11,10 @@ export const authSlice = createSlice({
         onRegister: ( state, { payload } ) => {
             state.status = 'authenticated';
             state.users = [...state.users, payload ]
-            console.log('register', payload);
         },
         onLogin: ( state, { payload } ) => {
             state.status = 'authenticated';
             state.user = payload
-            console.log('login', payload);
         },
         onLogout: ( state ) => {
             state.status = 'not-authenticated';
@@ -24,7 +22,7 @@ export const authSlice = createSlice({
         },
         onUpdateStorage: ( state, { payload }) => {
             state.users = payload
-            console.log('update', payload);
+
         }
     }
 });

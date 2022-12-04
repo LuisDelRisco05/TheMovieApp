@@ -7,12 +7,8 @@ export const ListMoviesHorizontalSmall = ({ movie, title }) => {
   
 
   return (
-
-        <>
-           
+        <>  
             <Text style={ styles.title }>{title}</Text>
-
-
             <FlatList 
                 data={ movie }
                 keyExtractor={ item => item.id }
@@ -32,9 +28,9 @@ export const ListMoviesHorizontalSmall = ({ movie, title }) => {
 const styles = StyleSheet.create({
   title: {
     color: '#E2E2E2', 
-    fontWeight: '500', 
+    fontSize: 21,
+    fontWeight: '700', 
+    marginBottom: 5,
     marginLeft: 20,
-    fontSize: 15,
-    marginBottom: 5
   },
 });

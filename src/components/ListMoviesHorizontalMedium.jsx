@@ -1,4 +1,4 @@
-import { FlatList, Image, StyleSheet, Text, View } from "react-native"
+import { FlatList, StyleSheet, Text, View } from "react-native"
 
 import Icon  from 'react-native-vector-icons/Ionicons';
 
@@ -11,27 +11,28 @@ export const ListMoviesHorizontalMedium = ({ movie, title }) => {
   return (
 
         <>
-            <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-              <Text style={ styles.title }>{title}</Text>
-              <Icon 
-                name="ellipsis-horizontal"
-                size={ 20 }
-                color="#FF722A"
-                style={ styles.icon }
-              />
+          <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+            
+            <Text style={ styles.title }>{title}</Text>
+            <Icon 
+              name="ellipsis-horizontal"
+              size={ 20 }
+              color="#FF722A"
+              style={ styles.icon }
+            />
 
-            </View>
+          </View>
 
-            <FlatList 
-                data={ movie }
-                keyExtractor={ item => item.id }
-                renderItem={ ({ item }) => (
+          <FlatList 
+            data={ movie }
+            keyExtractor={ item => item.id }
+            renderItem={ ({ item }) => (
 
-                  <ListMedium movie={ item } />
+              <ListMedium movie={ item } />
 
-                )}
-                horizontal={ true }
-                showsHorizontalScrollIndicator={ false }
+            )}
+            horizontal={ true }
+            showsHorizontalScrollIndicator={ false }
 
             />
         </>
@@ -41,10 +42,10 @@ export const ListMoviesHorizontalMedium = ({ movie, title }) => {
 const styles = StyleSheet.create({
   title: {
     color: '#E2E2E2', 
-    fontWeight: '500', 
-    marginLeft: 20,
-    fontSize: 17,
+    fontSize: 21,
+    fontWeight: '700', 
     marginBottom: 5, 
+    marginLeft: 20,
   },
   icon:{
     right: 25,

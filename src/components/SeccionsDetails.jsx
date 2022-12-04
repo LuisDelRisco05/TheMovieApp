@@ -5,7 +5,6 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 export const SeccionsDetails = ({ movie, moviesDetails }) => {
 
-    const year = moviesDetails?.release_date;
 
   return (
 
@@ -14,9 +13,9 @@ export const SeccionsDetails = ({ movie, moviesDetails }) => {
 
               <Text style={ styles.title }>{movie.title}</Text>
 
-              <View style={{ alignItems: 'center', marginRight: 20, marginTop: 5 }}>
+              <View style={{ alignItems: 'center', marginTop: 5 }}>
                       
-                <Text style={{color: '#9D9D9F', fontSize: 12}}>
+                <Text style={ styles.subtitulo }>
                   {moviesDetails.original_language} | { moviesDetails.genres && moviesDetails.genres[0].name } | {moviesDetails.runtime}m
                 </Text>
                 
@@ -33,16 +32,21 @@ const styles = StyleSheet.create({
     containerSectionOne: {
       marginHorizontal: 20,
       alignItems: 'center',
-      marginTop: 20,
+      marginBottom: 30,
     },
     containerSectionTwo: {
       flexDirection: 'row',
-      marginTop: 10,
       alignItems: 'center',
     },
     title: {
         color: '#E2E2E3',
-        fontSize: 22,
-        fontWeight: '600',
+        fontSize: 18,
+        fontWeight: '700',
     },
+    subtitulo: {
+      color: '#9D9D9F', 
+      fontSize: 14, 
+      fontWeight: '300',
+      textTransform: 'uppercase'
+    }
 })

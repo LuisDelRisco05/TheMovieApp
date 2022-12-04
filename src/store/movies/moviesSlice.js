@@ -3,9 +3,9 @@ import { createSlice } from '@reduxjs/toolkit';
 export const moviesSlice = createSlice({
     name: 'movies',
     initialState: {
+        loading: true,
         topRated:[],
         movieId:{},
-        loading: true,
         popular:[],
         youMayLike:[],
         activeGenre: 0,
@@ -18,6 +18,9 @@ export const moviesSlice = createSlice({
         savedMovies: []
     },  
     reducers: {
+        onSetLoading: ( state, { payload } ) => {
+            state.loading = payload 
+        },  
         onSetTopRated: ( state, { payload } ) => {
             state.topRated = payload
             state.loading = false 
@@ -29,8 +32,7 @@ export const moviesSlice = createSlice({
             state.popular = payload
         },
         onSetYouMayLike: ( state, { payload }) => {
-            state.youMayLike = payload   
-            
+            state.youMayLike = payload          
         },
         onSetActiveGenre: ( state, { payload }) => {
             state.activeGenre = payload
@@ -46,7 +48,6 @@ export const moviesSlice = createSlice({
         },
         onSetInfoVideos: ( state, { payload }) => {
             state.infoVideos = payload  
-            state.loading = false  
             
         },
         onSetCast: ( state, { payload }) => {
@@ -76,6 +77,7 @@ export const moviesSlice = createSlice({
 });
 
 export const { 
+    onSetLoading,
     onSetTopRated,
     onSetMovieId,
     onSetPopular,

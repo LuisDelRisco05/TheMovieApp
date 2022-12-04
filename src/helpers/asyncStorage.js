@@ -19,19 +19,19 @@ export const asyncStorage = () => {
 
     const getUserStorage = async() => {
 
+      await AsyncStorage.clear()
+
       try {
 
           const usersStorage = await AsyncStorage.getItem('users') ?? []
 
           if( usersStorage.length > 0){
             
-              console.log('usersStorage', usersStorage);
-
-            
-              startGetStorageUpdate(JSON.parse(usersStorage));
+            console.log('usersStorage', usersStorage);
+          
+            startGetStorageUpdate(JSON.parse(usersStorage));
           }
 
-          // console.log(' no entro a usersStorage', usersStorage);
 
       } catch (error) {
         console.log(error);

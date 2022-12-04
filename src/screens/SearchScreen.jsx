@@ -1,34 +1,38 @@
+import { useState } from "react";
 import { FlatList, Pressable, StyleSheet, Text, TextInput, View } from "react-native"
 import Icon  from "react-native-vector-icons/Ionicons";
 import { ViewMovieGenre } from "../components";
+import { useAuthStore } from "../hooks/useAuthStore";
 import { useMoviesStore } from "../hooks/useMoviesStore";
 
 export const SearchScreen = () => {
 
-
   const { search, startGetSetSearch} = useMoviesStore();
+
+  const [ view, setView ] = useState(false);
+
+  const { user } = useAuthStore();
 
   return (
 
     <View style={{ paddingHorizontal: 20, flex: 1, backgroundColor: '#1F1C2C'  }}>
 
-        <Text style={ styles.user}>Hi, Luis</Text>
+        <Text style={ styles.user}>Hi, {user.name}</Text>
 
         <TextInput 
-          placeholder="Seach movies"
-          placeholderTextColor='#BFBFC2'
+          placeholder="Search movies"
+          placeholderTextColor='#DDDDDD'
           cursorColor='#FFF'
           style={ styles.searchInput }
           onChangeText={ (keyword) => {
             startGetSetSearch(keyword)
+            keyword.trim() === '' && setView(false) 
           }}
         />
          
           <Pressable 
             style={ styles.btn }
-            onPress={ () => {
-              
-            }}
+            onPress={ () => setView( true ) }
           >
               
             <Icon 
@@ -39,14 +43,19 @@ export const SearchScreen = () => {
             />
           </Pressable>
 
-        <FlatList 
-          data={ search }
-          keyExtractor={ item => item.id }
-          renderItem={ ({ item }) => (
-            <ViewMovieGenre movie={ item } />
-          )}
-          showsVerticalScrollIndicator={ false }
-        />
+        {
+          view &&
+          (
+            <FlatList 
+              data={ search }
+              keyExtractor={ item => item.id }
+              renderItem={ ({ item }) => (
+                <ViewMovieGenre movie={ item } />
+              )}
+              showsVerticalScrollIndicator={ false }
+            />
+          )
+        }
                  
 
       </View>
@@ -57,18 +66,20 @@ const styles = StyleSheet.create({
   user: { 
     color: '#FFF',
     fontWeight: '700',
-    fontSize: 20,
+    fontSize: 24,
     marginVertical: 12
   },
   searchInput:{
-    backgroundColor: '#7E7C84',
+    backgroundColor: '#A9A9A9',
     width: 300,
     paddingLeft: 20,
     borderRadius: 30,
     zIndex: 4,
     color: '#FFF',
-    fontWeight: '600',
-    marginBottom: 10
+    fontWeight: '300',
+    marginBottom: 10,
+    opacity: 0.6,
+    fontSize: 13,
   },
   iconSearch:{
     top: 1,
@@ -78,7 +89,7 @@ const styles = StyleSheet.create({
   },
   btn: {
     position: 'absolute',
-    top: 55,
+    top: 61,
     right: 20,
     zIndex: 4,
     height: 40,

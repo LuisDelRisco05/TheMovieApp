@@ -29,8 +29,6 @@ export const HomeScreen = () => {
     youMayLike,
     activeGenre,
     startGetMovieDB,
-    startGetMoviePopular,
-    startGetYouMayLike,
     startActiveGenre,
     startMoviesGenre
   } = useMoviesStore();
@@ -40,8 +38,6 @@ export const HomeScreen = () => {
   useEffect(() => {
     const getMovie = async() => {
       await startGetMovieDB()
-      await startGetMoviePopular()
-      await startGetYouMayLike()
     }
     getMovie() 
   }, [])
@@ -50,11 +46,8 @@ export const HomeScreen = () => {
 
   return (
 
-      // <ScrollView>
-
         <View style={{ flex: 1, backgroundColor: '#1F1C2C' }}>
         
-
           {
             loading 
             ? (
@@ -80,26 +73,20 @@ export const HomeScreen = () => {
                   <ListMoviesHorizontalMedium movie={ popular } title="Popular" />
 
                   <ListMoviesHorizontalSmall movie={ youMayLike } title="You may like" />
-  
-  
                  
                 </View>
               )
-
           }      
-          
+        
         </View>
-
-      // </ScrollView>
-
   )
 }
 
 const styles = StyleSheet.create({
     user: { 
       color: '#FFF',
+      fontSize: 24,
       fontWeight: '700',
-      fontSize: 20,
       marginHorizontal: 20,
       marginVertical: 10
     }

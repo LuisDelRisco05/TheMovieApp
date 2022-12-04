@@ -11,7 +11,7 @@ export const ViewMovieGenre = ({ movie, genre }) => {
 
     const { startGetMovieId } = useMoviesStore();
 
-    const uri = `https://image.tmdb.org/t/p/w500${ movie.poster_path }`;
+    const uri = `https://image.tmdb.org/t/p/w500${ movie.backdrop_path }`;
 
 
   return (
@@ -26,14 +26,14 @@ export const ViewMovieGenre = ({ movie, genre }) => {
         style={{ borderRadius: 18, flex: 1 }}
     >
         {
-        movie?.poster_path && 
+        movie?.backdrop_path && 
             (
                 <View style={styles.container}>
 
                     <Image 
                         source={{ uri }}
                         style={ styles.img }
-                        resizeMode='stretch'
+                        resizeMode='cover'
                     />
 
                     <View style={ styles.containerInfo }>

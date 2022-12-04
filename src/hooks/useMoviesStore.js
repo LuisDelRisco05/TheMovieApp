@@ -3,6 +3,7 @@ import axios from 'axios';
 import {movieDB} from '../api/movieDB';
 import { getEnvVariables } from '../helpers/getEnvVariables';
 import {
+  onSetLoading,
   onSetTopRated,
   onSetMovieId,
   onSetPopular,
@@ -14,9 +15,9 @@ import {
   onSetInfoVideos,
   onSetCast,
   onSetSimilarMovie,
-  onReset,
   onSetSavedMovies,
-  onSetDeleteSavedMovies
+  onSetDeleteSavedMovies,
+  onReset,
 } from '../store/movies/moviesSlice';
 
 export const useMoviesStore = () => {
@@ -24,9 +25,9 @@ export const useMoviesStore = () => {
       const dispatch = useDispatch();
 
       const {
+        loading,
         topRated,
         movieId,
-        loading,
         popular,
         youMayLike,
         activeGenre,
@@ -45,50 +46,46 @@ export const useMoviesStore = () => {
 
       const startGetMovieDB = async() => {
           try {
+            //* obtenter movies mejor puntaje
             const respTopRated = await movieDB.get(`/movie/top_rated`);
-            const resultTopRated = respTopRated.data.results;
 
-            dispatch( onSetTopRated(resultTopRated) );
+            //* obtener peliculas populares
+            const respPopular = await movieDB.get(`/movie/popular`);
+      
+
+            dispatch( onSetPopular(resultPopular) );
+            //* obtener peliculas pueden gustarte
+            const respYouMayLike = await movieDB.get(`/movie/now_playing`);
+
+            const [ 
+              resultTopRated,
+              resultPopular, 
+              resultYouMayLike 
+            ] 
+            = await Promise.all([ respTopRated, respPopular, respYouMayLike]);
+
+            dispatch( onSetTopRated(resultTopRated.data.results) );
+            dispatch( onSetPopular(resultPopular.data.results) );
+            dispatch( onSetYouMayLike(resultYouMayLike.data.results) );
+         
 
           } catch (error) {
             console.log(error);
           }
       };
 
+      //* id de las pelicula seleccionada
       const startGetMovieId = id => {
         dispatch( onSetMovieId(id) );
       };
       
-      const startGetMoviePopular = async() => {
-          try {
-
-            const respPopular = await movieDB.get(`/movie/popular`);
-            const resultPopular = respPopular.data.results;
-
-            dispatch( onSetPopular(resultPopular) );
-            
-          } catch (error) {
-            console.log(error);
-          }
-      }
-
-      const startGetYouMayLike = async() => {
-        try {
-
-          const respYouMayLike = await movieDB.get(`/movie/now_playing`);
-          const resultYouMayLike = respYouMayLike.data.results;
-
-          dispatch( onSetYouMayLike(resultYouMayLike) );
-          
-        } catch (error) {
-          console.log(error);
-        }
-      }
-
+      
+      //* id para identificar el genero de la pelicula
       const startActiveGenre =  id  => {
         dispatch( onSetActiveGenre( id ))
       }
 
+      //* separar cada pelicula deacuerdo a su genero
       const startMoviesGenre = genre => {
 
         const { action, comedy, horror, opc }= genre;
@@ -109,9 +106,9 @@ export const useMoviesStore = () => {
 
       }
 
+      //* obtengo peliculas por palabra clave
       const startGetSetSearch = async(keyword ) => {
 
-        //* obtengo peliculas por palabra clave
         try {
           
           if(keyword){
@@ -127,6 +124,8 @@ export const useMoviesStore = () => {
       }
 
       const startGetInfoVideos = async () => {
+
+        dispatch( onSetLoading(true))
         try {
           //* obtengo los videos
           const respInfoVideos = await movieDB.get(`/movie/${movieId}/videos`);
@@ -151,6 +150,7 @@ export const useMoviesStore = () => {
           dispatch( onSetMoviesDetails( resultMovieDetails.data) );
           dispatch( onSetCast(resultCast.data) )
           dispatch( onSetSimilarMovie(resultSimilar.data.results) )
+          dispatch( onSetLoading(false))
 
         } catch (error) {
           console.log(error);
@@ -162,12 +162,13 @@ export const useMoviesStore = () => {
         dispatch( onReset() )
       }
 
-      //* Guardar peliculas
+      //* guardar peliculas en saved
       const startSavedMovies = movies => {
         const saved = [...savedMovies, movies]
         dispatch( onSetSavedMovies( saved ) )
       }
 
+      //* eliminar de la lista de saved
       const startDeleteSaved = movies => {
         dispatch( onSetDeleteSavedMovies( movies ))
       }
@@ -177,8 +178,9 @@ export const useMoviesStore = () => {
 
   return {
     //State
-    topRated,
     loading,
+    topRated,
+    movieId,
     popular,
     youMayLike,
     activeGenre,
@@ -193,14 +195,12 @@ export const useMoviesStore = () => {
     //Functions
     startGetMovieDB,
     startGetMovieId,
-    startGetMoviePopular,
-    startGetYouMayLike,
     startActiveGenre,
     startMoviesGenre,
     startGetSetSearch,
-    startReset,
     startGetInfoVideos,
     startSavedMovies,
-    startDeleteSaved
+    startDeleteSaved,
+    startReset,
   };
 };

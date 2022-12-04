@@ -8,7 +8,7 @@ import { useMoviesStore } from "../hooks/useMoviesStore";
 
 export const MoviesGenresScreen = ({ route, navigation }) => {
 
-  const { moviesGenres, moviesDetails, startMoviesDetails } = useMoviesStore()
+  const { moviesGenres, startActiveGenre } = useMoviesStore()
 
   const { params } = route;
 
@@ -30,7 +30,10 @@ export const MoviesGenresScreen = ({ route, navigation }) => {
                 size={ 30 }
                 color="#FFF"
                 style={ styles.back }
-                onPress={ () => navigation.goBack()}
+                onPress={ () => {
+                  navigation.goBack()
+                  startActiveGenre(0)
+                }}
               />
               <Text style={ styles.title}>{params}</Text>
             </>

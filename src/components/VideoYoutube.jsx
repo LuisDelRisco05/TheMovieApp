@@ -9,24 +9,22 @@ import { useMoviesStore } from "../hooks/useMoviesStore";
 
 LogBox.ignoreLogs(['SerializableStateInvariantMiddleware']);
 
-export const VideoYoutube = ({ infoVideos, moviesDetails }) => {
+export const VideoYoutube = ({ infoVideos, moviesDetails, movie }) => {
 
     const [ watch, setWatch ] = useState(false);
-
 
     const navigation =  useNavigation();
 
     const { startSavedMovies, startReset } = useMoviesStore();
 
-    const uri = `https://image.tmdb.org/t/p/w500${ moviesDetails.poster_path }`;
+    const uri = `https://image.tmdb.org/t/p/w500${ movie.backdrop_path }`;
 
-    
     
   return (
         <View style={{ paddingTop: 10, backgroundColor: '#1F1C2C', marginHorizontal: 20}}>
 
             <TouchableOpacity
-                style={{ width: 50, opacity: 0.6 }}
+                style={{ width: 50 }}
                 onPress={ () => {
                     navigation.goBack()
                     startReset()
@@ -68,7 +66,7 @@ export const VideoYoutube = ({ infoVideos, moviesDetails }) => {
                             <Image 
                                 source={{ uri }}
                                 style={ styles.img }
-                                resizeMode='stretch'
+                                resizeMode='cover'
                             />
                             <View style={ styles.containerInfo }>
 
@@ -165,9 +163,10 @@ const styles = StyleSheet.create({
     },
     watch: {
         top: 13,
-        fontSize: 20,
+        fontSize: 18,
         color: '#FFF',
         left: 50,
-        width: 100
+        width: 100,
+        fontWeight: '700'
     }
   });

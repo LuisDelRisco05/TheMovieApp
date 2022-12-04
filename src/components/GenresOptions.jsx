@@ -1,6 +1,5 @@
 import { useNavigation } from "@react-navigation/native"
-import { useState } from "react"
-import { Pressable, StyleSheet, Text, View } from "react-native"
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native"
 import { useGenres } from "../hooks/useGenres"
 
 
@@ -11,22 +10,20 @@ export const GenresOptions = ({ activeGenre, startActiveGenre, startMoviesGenre 
 
     const { action, comedy, horror } = useGenres()
 
-    
-
     const options = [
         { id: 0,  name:'All' },
         { id: 28, name:'Action' },
         { id: 35, name:'Comedy' },
         { id: 27, name:'Horror' },
-    ]
-    
+    ]  
 
   return (
 
         <View style={ styles.container }>
 
             { options.map( opc => (
-                <Pressable 
+                <TouchableOpacity
+                    activeOpacity={ 0.8 } 
                     key={ opc.id }
                     style={styles.optionBtn }
                     onPress={ () =>{ 
@@ -38,7 +35,7 @@ export const GenresOptions = ({ activeGenre, startActiveGenre, startMoviesGenre 
                     <View style={ activeGenre === opc.id && styles.select }>
                         <Text style={ styles.title }>{opc.name}</Text>
                     </View>
-                </Pressable>
+                </TouchableOpacity>
             ))}
 
 
@@ -49,28 +46,30 @@ export const GenresOptions = ({ activeGenre, startActiveGenre, startMoviesGenre 
 
 const styles = StyleSheet.create({
     container: { 
+        alignItems: 'center',
         flexDirection: 'row', 
         height: 40, 
         justifyContent: 'space-between',
-        alignItems: 'center',
-        width: 310,
+        marginBottom: 10,
         marginLeft: 20,
-        marginBottom: 10 
+        width: 310,
     },
     optionBtn: { 
         height: 20,
-        width: 60,
         justifyContent: 'center',
+        width: 60,
     },
     title:{
         color: '#FFF',
-        fontSize: 13,
-        textAlign: 'center'
+        fontSize: 16,
+        fontWeight: '500',
+        textAlign: 'center',
     },
     select: {
-        backgroundColor: '#793B2C',
+        backgroundColor: '#FF692B',
         borderRadius: 20,
         height: 26,
         justifyContent: 'center',
+        opacity: 0.4,
     }
 })

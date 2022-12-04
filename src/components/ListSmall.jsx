@@ -12,7 +12,7 @@ export const ListSmall = ({ movie }) => {
     const { startGetMovieId } = useMoviesStore();
 
 
-    const uri = `https://image.tmdb.org/t/p/w500${ movie.poster_path }`
+    const uri = `https://image.tmdb.org/t/p/w500${ movie.backdrop_path }`
 
 
   return (
@@ -24,14 +24,14 @@ export const ListSmall = ({ movie }) => {
                 style={{ borderRadius: 18 }}
             >
                 {
-                    movie?.poster_path && 
+                    movie?.backdrop_path && 
                     (
                         <View style={ styles.container }>
 
                             <Image    
                                 source={{ uri }}
                                 style={ styles.img }
-                                resizeMode='stretch'
+                                resizeMode='cover'
                             />
 
                             <View style={ styles.containerInfo }>
@@ -45,7 +45,7 @@ export const ListSmall = ({ movie }) => {
                                         size={ 9 }
                                         color="#FFCE31"
                                     />
-                                    <Text style={{ color: '#FFF', marginLeft: 3, fontSize: 8.5 }}>
+                                    <Text style={ styles.vote }>
                                         {(movie.vote_average).toString().slice(0, 3)}
                                     </Text>
 
@@ -87,15 +87,15 @@ const styles = StyleSheet.create({
         right: 15,
         width: 110,
         height: 35,
-        backgroundColor:'#7E7C84',
+        backgroundColor:'#A9A9A9',
         borderRadius: 20,
-        opacity: 0.9,
+        opacity: 0.7,
         
       },
     title: {
         color: '#FFF',
-        fontSize: 6.5,
-        fontWeight: '600',
+        fontSize: 9,
+        fontWeight: '400',
         left: 10,
         top: 4,
         width: 70
@@ -120,6 +120,11 @@ const styles = StyleSheet.create({
         left: 11,
         bottom: 2,
         position:'absolute'
-
+    },
+    vote: { 
+        color: '#FFF', 
+        marginLeft: 3, 
+        fontSize: 9,
+        fontWeight: '400' 
     }
 });

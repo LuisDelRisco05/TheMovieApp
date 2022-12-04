@@ -24,7 +24,6 @@ export const LoginScreen = ({ navigation }) => {
   useEffect(() => {
    
     getUserStorage() 
-    // console.log('se ejecuto effect getUserStorage');
 
   }, [])
 
@@ -32,7 +31,7 @@ export const LoginScreen = ({ navigation }) => {
 
     if(users.length > 0) {   
         saveUserStorage(users)
-        // console.log('se ejecuto effect saveUser', users);
+ 
     }
 
   }, [users])

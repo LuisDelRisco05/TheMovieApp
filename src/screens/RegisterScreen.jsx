@@ -25,7 +25,6 @@ export const RegisterScreen = ({ navigation }) => {
   useEffect(() => {
    
     getUserStorage() 
-    console.log('se ejecuto effect getUserStorage');
 
   }, [])
 
@@ -33,14 +32,13 @@ export const RegisterScreen = ({ navigation }) => {
 
     if(users.length > 0) {   
         saveUserStorage(users)
-        console.log('se ejecuto effect saveUser', users);
+
     }
 
   }, [users])
 
 
   const onSignUp = () => {  
-    console.log('press in Register');
     
     Keyboard.dismiss();
 
@@ -55,7 +53,6 @@ export const RegisterScreen = ({ navigation }) => {
     } 
 
     startSaveUser(form);
-    // startLogin(form)
 
     navigation.replace('LoginScreen');
   }
@@ -182,7 +179,7 @@ export const RegisterScreen = ({ navigation }) => {
             </TouchableOpacity>
 
             <View style={ styles.containerFooter }>
-              <Text style={{ ...styles.footer, color: '#9C9C9C' }}>Don't have an account?</Text>
+              <Text style={{ ...styles.footer, color: '#9C9C9C' }}>Already have an account?</Text>
 
               <TouchableOpacity 
                 activeOpacity={ 0.8 }

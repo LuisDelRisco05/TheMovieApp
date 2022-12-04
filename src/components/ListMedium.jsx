@@ -1,4 +1,4 @@
-import { Image, Pressable, StyleSheet, Text, TouchableOpacity, View } from "react-native"
+import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native"
 import { useNavigation } from "@react-navigation/native";
 
 import Icon  from 'react-native-vector-icons/Ionicons';
@@ -12,114 +12,119 @@ export const ListMedium = ({ movie }) => {
     const { startGetMovieId } = useMoviesStore();
 
 
-    const uri = `https://image.tmdb.org/t/p/w500${ movie.poster_path }`
+    const uri = `https://image.tmdb.org/t/p/w500${ movie.backdrop_path }`
 
-  return (
+    return (
 
-            <TouchableOpacity 
-                onPress={ () => {
-                    navigation.navigate( 'DetailsScreen', movie )
-                    startGetMovieId(movie.id)
-                }}
-                style={{ borderRadius: 18 }}
-            >
-                {
-                    movie?.poster_path && 
-                    (
-                        <View style={ styles.container }>
+        <TouchableOpacity 
+            onPress={ () => {
+                startGetMovieId(movie.id)
+                navigation.navigate( 'DetailsScreen', movie )
+            }}
+            style={{ borderRadius: 18 }}
+        >
+            {
+                movie?.backdrop_path && 
+                (
+                    <View style={ styles.container }>
 
-                            <Image    
-                                source={{ uri }}
-                                style={ styles.img }
-                                resizeMode='stretch'
-                            />
+                        <Image    
+                            source={{ uri }}
+                            style={ styles.img }
+                            resizeMode='cover'
+                        />
 
-                            <View style={ styles.containerInfo }>
+                        <View style={ styles.containerInfo }>
 
-                                <Text style={ styles.title }>{movie.title}</Text>
+                            <Text style={ styles.title }>{movie.title}</Text>
 
-                                <View style={ styles.containerStart }>
+                            <View style={ styles.containerStart }>
 
-                                    <Icon 
-                                        name="star-sharp"
-                                        size={ 9 }
-                                        color="#FFCE31"
-                                    />
-                                    <Text style={{ color: '#FFF', marginLeft: 3, fontSize: 8.5 }}>
-                                        {(movie.vote_average).toString().slice(0, 3)}
-                                    </Text>
-
-                                </View>
-
-                                <View style={ styles.colorPlay } />
-                                    
                                 <Icon 
-                                    name="play-circle-sharp"
-                                    size={ 27 }
-                                    color="#FFF"
-                                    style={ styles.iconPlay }
+                                    name="star-sharp"
+                                    size={ 9 }
+                                    color="#FFCE31"
                                 />
+                                <Text style={ styles.vote }>
+                                    {(movie.vote_average).toString().slice(0, 3)}
+                                </Text>
 
                             </View>
 
+                            <View style={ styles.colorPlay } />
+                                
+                            <Icon 
+                                name="play-circle-sharp"
+                                size={ 27 }
+                                color="#FFF"
+                                style={ styles.iconPlay }
+                            />
+
                         </View>
-                    )
-                }
-            </TouchableOpacity>
-  )
+
+                    </View>
+                )
+            }
+        </TouchableOpacity>
+    )
 }
 
 const styles = StyleSheet.create({
     container:{
         justifyContent: 'center',
+        marginBottom: 25,
         marginTop: 5,
-        marginBottom: 25
     },
     img:{
         borderRadius: 20,
-        height: 135, 
-        width: 155, 
-        marginHorizontal: 20
+        height: 132, 
+        marginHorizontal: 20,
+        width: 153, 
     },
     containerInfo: {
-        position: 'absolute',
+        backgroundColor:'#A9A9A9',
+        borderRadius: 20,
         bottom: 2,
+        height: 35,
+        opacity: 0.7,
+        position: 'absolute',
         right: 25,
         width: 145,
-        height: 35,
-        backgroundColor:'#7E7C84',
-        borderRadius: 20,
-        opacity: 0.9,
         
       },
     title: {
         color: '#FFF',
-        fontSize:8,
-        fontWeight: '700',
+        fontSize: 11,
+        fontWeight: '400',
         left: 10,
         top: 3,
         width: 100
     },
     iconPlay: {
-        position: 'absolute',
-        bottom: 2,
-        right: 2,
         borderRadius: 50,
+        bottom: 2,
+        position: 'absolute',
+        right: 2,
       },
       colorPlay: {
         backgroundColor: '#FF722A',
-        height: 10,
-        width: 10,
-        position: 'absolute',
         bottom: 11,
-        right: 10
+        height: 10,
+        position: 'absolute',
+        right: 10,
+        width: 10,
       },
       containerStart: { 
-        flexDirection: 'row',
         alignItems: 'center', 
-        left: 11,
         bottom: 2,
+        flexDirection: 'row',
+        left: 11,
         position:'absolute'
-
+    },
+    vote: { 
+        color: '#FFF', 
+        marginLeft: 3, 
+        fontSize: 11, 
+        fontWeight: '400' 
     }
 });

@@ -8,6 +8,7 @@ import { Loading, VideoYoutube, ListCast, SeccionsDetails, ListMoviesHorizontalS
 
 export const DetailsScreen = ({route}) => {
   const {
+    loading,
     movieId,
     infoVideos,
     moviesDetails,
@@ -26,22 +27,20 @@ export const DetailsScreen = ({route}) => {
     video();
   }, [movieId]);
 
-
-
   return (
 
       <View style={{flex: 1}}>
 
-        {moviesDetails 
-          && 
-          (
+        {loading 
+          ? <Loading />
+          :(
               <ScrollView>
 
                 <View>
 
                   {/* Video de YouTube */}
 
-                  <VideoYoutube infoVideos={infoVideos} startReset={startReset} moviesDetails={ moviesDetails } />
+                  <VideoYoutube infoVideos={infoVideos} startReset={startReset} moviesDetails={ moviesDetails } movie={movie} />
 
                   <SeccionsDetails movie={ movie } moviesDetails={ moviesDetails } />
 
