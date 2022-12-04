@@ -59,138 +59,145 @@ export const RegisterScreen = ({ navigation }) => {
 
 
   return (
-    <KeyboardAvoidingView style={{ paddingHorizontal: 22, flex: 1 }}>
+    <KeyboardAvoidingView style={{  flex: 1 }}>
 
       <ScrollView style={{ flex: 1 }}
         showsVerticalScrollIndicator={ false }
       >
+        <View style={{ paddingHorizontal: 20, flex: 1 }}>
 
-        <View style={{ flexDirection: 'row'}}>
+            <View style={{ flexDirection: 'row'}}>
 
-          <TouchableOpacity
-            activeOpacity={ 0.8 }
-            style={ styles.arrow }
-            onPress={ () => navigation.navigate('LoginScreen') }
-          >
-            <Icon 
-              name="arrow-back-outline"
-              size={25}
-              color="#FFF"
-                
-            />
-          </TouchableOpacity>
-
-          <Text style={{ ...styles.title, fontSize: 24 }}>Sign up</Text>
-
-        </View>
-
-        <View style={{ height: 120, top: 30 }}>
-
-          <Text style={{ color: '#9C9C9C', fontSize: 13, fontWeight: '400' }}>Sign up with one of following options</Text>
-
-          <View style={{ height: 55, top: 50, flexDirection: 'row', justifyContent: 'space-between' }}>
-
-            <View style={ styles.network }>
-                <Icon 
-                  name="logo-apple" 
-                  color="#FFF"
-                  size={ 25 }
-                />
-            </View>
-
-            <View style={ styles.network }>
-                <Icon 
-                  name= "logo-google"
-                  color="#FFF"
-                  size={ 25 }
-                />
-              
-            </View>
-
-          </View>
-        </View>
-
-        {/* Formulario registro */}
-        <View style={{ height: 370, top: 60 }}>
-
-          <Text style={ styles.title }>Name</Text>
-
-          <TextInput 
-            placeholder="Enter your name"
-            placeholderTextColor='#FFF'
-            cursorColor='#FFF'
-            style={ styles.textInput }
-            onChangeText={ value => onChange( 'name', value ) }
-            autoComplete='off'
-            autoCapitalize="words"
-            value={name}
-          />
-
-          <Text style={ styles.title }>Email</Text>
-
-          <TextInput 
-            placeholder="Enter your email"
-            placeholderTextColor='#FFF'
-            cursorColor='#FFF'
-            style={ styles.textInput }
-            onChangeText={ value => onChange( 'email', value ) }
-            keyboardType="email-address"
-            autoComplete='off'
-            value={ email }
-            autoCapitalize="none"
-          />
-
-          <Text style={ styles.title }>Password</Text>
-
-          <TextInput 
-            placeholder="Enter your password"
-            placeholderTextColor='#FFF'
-            cursorColor='#FFF'
-            style={ styles.textInput }
-            onChangeText={ value => onChange( 'password', value ) }
-            secureTextEntry={ hidePassword }
-            value={ password }
-          />
-
-          <Icon
-            name={ hidePassword ? "eye-off-outline"  : "eye-outline" }
-            size={ 20 }
-            color="#959596"
-            style={ styles.icon }
-            onPress={ () => setHidePassword(!hidePassword) }
-          />
-
-        </View>
-   
-          {/* Btn gradient */}
-          <View style={{ height: 300 }}>
-
-            <TouchableOpacity onPress={ onSignUp } activeOpacity={ 0.8 }>
-              <LinearGradient 
-                start={{x: 0, y: 0}} 
-                end={{x: 1, y: 0}} 
-                colors={['#67657c', '#ff8e54']}
-                style={{ ...styles.btn }}
+              <TouchableOpacity
+                activeOpacity={ 0.8 }
+                style={ styles.arrow }
+                onPress={ () => navigation.navigate('LoginScreen') }
               >
+                <Icon 
+                  name="arrow-back-outline"
+                  size={25}
+                  color="#FFF"
+                    
+                />
+              </TouchableOpacity>
 
-              <Text style={{ color: '#FFF', fontSize: 18, fontWeight: '700' }}>Create Account</Text>
+              <Text style={{ ...styles.title, fontSize: 24 }}>Sign up</Text>
 
-              </LinearGradient>
-            </TouchableOpacity>
+            </View>
 
-            <View style={ styles.containerFooter }>
-              <Text style={{ ...styles.footer, color: '#9C9C9C' }}>Already have an account?</Text>
+            <View style={{ height: 120, top: 40 }}>
+
+              <Text style={{ color: '#9C9C9C', fontSize: 13, fontWeight: '400' }}>Sign up with one of following options</Text>
+
+              <View style={{ height: 55, top: 40, flexDirection: 'row', justifyContent: 'space-between' }}>
+
+                <View style={ styles.network }>
+                    <Icon 
+                      name="logo-apple" 
+                      color="#FFF"
+                      size={ 25 }
+                    />
+                </View>
+
+                <View style={ styles.network }>
+                    <Icon 
+                      name= "logo-google"
+                      color="#FFF"
+                      size={ 25 }
+                    />
+                  
+                </View>
+
+              </View>
+            </View>
+
+            {/* Formulario registro */}
+            <View style={{ height: 370, top: 60 }}>
+
+              <Text style={ styles.title }>Name</Text>
+
+              <TextInput 
+                placeholder="Enter your name"
+                placeholderTextColor='#FFF'
+                cursorColor='#FFF'
+                style={ styles.textInput }
+                onChangeText={ value => onChange( 'name', value ) }
+                autoComplete='off'
+                autoCapitalize="words"
+                value={name}
+              />
+
+              <Text style={ styles.title }>Email</Text>
+
+              <TextInput 
+                placeholder="Enter your email"
+                placeholderTextColor='#FFF'
+                cursorColor='#FFF'
+                style={ styles.textInput }
+                onChangeText={ value => onChange( 'email', value ) }
+                keyboardType="email-address"
+                autoComplete='off'
+                value={ email }
+                autoCapitalize="none"
+              />
+
+              <Text style={ styles.title }>Password</Text>
+
+              <TextInput 
+                placeholder="Enter your password"
+                placeholderTextColor='#FFF'
+                cursorColor='#FFF'
+                style={ styles.textInput }
+                onChangeText={ value => onChange( 'password', value ) }
+                secureTextEntry={ hidePassword }
+                value={ password }
+              />
 
               <TouchableOpacity 
-                activeOpacity={ 0.8 }
-                onPress={ () => navigation.navigate('LoginScreen')}
+                activeOpacity={ 0.7 }
+                style={ styles.icon } 
+                onPress={ () => setHidePassword(!hidePassword) }
               >
-
-                <Text style={{ ...styles.footer, color: '#FFF', marginLeft: 3 }}>Login</Text>
-
+                <Icon
+                  name={ hidePassword ? "eye-off-outline"  : "eye-outline" }
+                  size={ 20 }
+                  color="#959596"
+                />
               </TouchableOpacity>
 
             </View>
+      
+              {/* Btn gradient */}
+              <View style={{ height: 300 }}>
+
+                <TouchableOpacity onPress={ onSignUp } activeOpacity={ 0.8 }>
+                  <LinearGradient 
+                    start={{x: 0, y: 0}} 
+                    end={{x: 1, y: 0}} 
+                    colors={['#67657c', '#ff8e54']}
+                    style={{ ...styles.btn }}
+                  >
+
+                  <Text style={{ color: '#FFF', fontSize: 18, fontWeight: '700' }}>Create Account</Text>
+
+                  </LinearGradient>
+                </TouchableOpacity>
+
+                <View style={ styles.containerFooter }>
+                  <Text style={{ ...styles.footer, color: '#9C9C9C' }}>Already have an account?</Text>
+
+                  <TouchableOpacity 
+                    activeOpacity={ 0.8 }
+                    onPress={ () => navigation.navigate('LoginScreen')}
+                  >
+
+                    <Text style={{ ...styles.footer, color: '#FFF', marginLeft: 3 }}>Login</Text>
+
+                  </TouchableOpacity>
+
+                </View>
+
+              </View>
 
           </View>
 
@@ -230,10 +237,14 @@ const styles = StyleSheet.create({
     fontSize: 18 
   },
   icon:{
-    bottom: 80,
-    right: 12,
+    bottom: 70,
+    right: 5,
     zIndex: 5,
     position: 'absolute',
+    height: 40,
+    justifyContent: 'center',
+    width: 40,
+    alignItems: 'center'
   },
   arrow: { 
     width: 30,

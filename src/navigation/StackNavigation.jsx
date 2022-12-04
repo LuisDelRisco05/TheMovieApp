@@ -17,7 +17,7 @@ export const StackNavigation = () => {
               backgroundColor: '#1F1C2C'
             }
           }} 
-          initialRouteName="BottomTab"
+          initialRouteName="SplashScreen"
       >
         <stack.Screen name="SplashScreen" component={ SplashScreen } />
         <stack.Screen name="BottomTab" component={ BottomTab } />

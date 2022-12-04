@@ -94,7 +94,7 @@ export const LoginScreen = ({ navigation }) => {
           >
               <View style={{ paddingHorizontal: 20, flex: 1 }}>
 
-                  <View style={{ flexDirection: 'row' }}>
+                  <View style={{ flexDirection: 'row'}}>
 
                     <TouchableOpacity
                       activeOpacity={ 0.8 }
@@ -168,13 +168,17 @@ export const LoginScreen = ({ navigation }) => {
                       autoCapitalize="none"
                     />
 
-                    <Icon
-                      name={ hidePassword ? "eye-off-outline"  : "eye-outline" }
-                      size={ 20 }
-                      color="#959596"
-                      style={ styles.icon }
+                    <TouchableOpacity 
+                      activeOpacity={ 0.7 }
+                      style={ styles.icon } 
                       onPress={ () => setHidePassword(!hidePassword) }
-                    />
+                    >
+                      <Icon
+                        name={ hidePassword ? "eye-off-outline"  : "eye-outline" }
+                        size={ 20 }
+                        color="#959596"
+                      />
+                    </TouchableOpacity>
 
                   </View>
             
@@ -245,10 +249,14 @@ const styles = StyleSheet.create({
     fontSize: 18 
   },
   icon:{
-    bottom: 40,
-    right: 12,
+    bottom: 35,
+    right: 5,
     zIndex: 5,
     position: 'absolute',
+    height: 40,
+    justifyContent: 'center',
+    width: 40,
+    alignItems: 'center'
   },
   arrow: { 
     width: 30,
