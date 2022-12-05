@@ -1,9 +1,16 @@
 import { useEffect } from "react"
-import { Text, View, StyleSheet, ScrollView } from "react-native"
+import { Text, View, StyleSheet } from "react-native"
 
-import { CarouselMovie } from "../components/CarouselMovie";
-import { Loading } from "../components/Loading";
-import { useMoviesStore } from "../hooks/useMoviesStore";
+import { Loading } from "../components/Loading"
+import { useMoviesStore } from "../hooks/useMoviesStore"
+import { 
+  CarouselMovie, 
+  Filter, 
+  GenresOptions, 
+  ListMoviesHorizontalMedium, 
+  ListMoviesHorizontalSmall 
+} from "../components"
+import { useAuthStore } from "../hooks/useAuthStore"
 
 
 
@@ -11,24 +18,36 @@ import { useMoviesStore } from "../hooks/useMoviesStore";
 
 export const HomeScreen = () => {
 
-  const { topRated, loading, startGetMovieDB } = useMoviesStore()
+  
 
-    useEffect(() => {
-      const getMovie = async() => {
-        await startGetMovieDB()
-      }
-      getMovie() 
-    }, [])
+  const { user } = useAuthStore();
+
+  const {
+    loading,
+    topRated,
+    popular,
+    youMayLike,
+    activeGenre,
+    startGetMovieDB,
+    startActiveGenre,
+    startMoviesGenre
+  } = useMoviesStore();
+
+    
+
+  useEffect(() => {
+    const getMovie = async() => {
+      await startGetMovieDB()
+    }
+    getMovie() 
+  }, [])
     
     
 
   return (
 
-      <ScrollView>
-
-        <View style={{ flex: 1, backgroundColor: 'red', }}>
+        <View style={{ flex: 1, backgroundColor: '#1F1C2C' }}>
         
-
           {
             loading 
             ? (
@@ -39,20 +58,36 @@ export const HomeScreen = () => {
             : (
                 <View>
 
+                  <Text style={ styles.user}>Hi, {user.name}</Text>
+
+                  <GenresOptions 
+                    activeGenre={ activeGenre} 
+                    startActiveGenre={ startActiveGenre } 
+                    startMoviesGenre={ startMoviesGenre }
+                  />
+
+                  <Filter />
+
                   <CarouselMovie topRated={ topRated } />
+
+                  <ListMoviesHorizontalMedium movie={ popular } title="Popular" />
+
+                  <ListMoviesHorizontalSmall movie={ youMayLike } title="You may like" />
                  
                 </View>
               )
-
           }      
-          
+        
         </View>
-
-      </ScrollView>
-
   )
 }
 
 const styles = StyleSheet.create({
-
+    user: { 
+      color: '#FFF',
+      fontSize: 24,
+      fontWeight: '700',
+      marginHorizontal: 20,
+      marginVertical: 10
+    }
 })
