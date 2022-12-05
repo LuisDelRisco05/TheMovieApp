@@ -24,7 +24,7 @@ export const ViewMovieGenre = ({ movie, genre }) => {
             navigation.navigate( 'DetailsScreen', movie )
             startGetMovieId(movie.id)
         }}
-        style={{ flex: 1 }}
+        style={{ flex: 1, marginLeft: 18 }}
     >
         {
         movie?.backdrop_path && 
