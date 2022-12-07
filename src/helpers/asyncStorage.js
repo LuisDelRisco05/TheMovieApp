@@ -19,7 +19,7 @@ export const asyncStorage = () => {
 
     const getUserStorage = async() => {
 
-      await AsyncStorage.clear()
+      // await AsyncStorage.clear()
 
       try {
 

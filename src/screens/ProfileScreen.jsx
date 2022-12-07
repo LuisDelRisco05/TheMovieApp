@@ -31,7 +31,7 @@ const options = [
 
 export const ProfileScreen = ({ navigation }) => {
 
-  const { user } = useAuthStore();
+  const { user, startLogout } = useAuthStore();
 
   return (
     <View style={{ flex: 1, backgroundColor: '#1F1C2C' }}>
@@ -80,7 +80,7 @@ export const ProfileScreen = ({ navigation }) => {
         </View>
 
         <TouchableOpacity 
-          onPress={ () => navigation.replace('LoginScreen') }
+          onPress={ startLogout }
           activeOpacity={0.8} 
           style={ styles.containerSignOut }
         >

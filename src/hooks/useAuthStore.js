@@ -1,13 +1,13 @@
 import { useDispatch, useSelector } from "react-redux";
 
-import { onRegister, onLogin, onUpdateStorage } from "../store/auth/authSlice";
+import { onRegister, onLogin, onLogout, onUpdateStorage } from "../store/auth/authSlice";
 
 
 export const useAuthStore = () => {
 
     const dispatch = useDispatch();
 
-    const { user, users } = useSelector( state => state.auth);
+    const { user, users, status } = useSelector( state => state.auth);
 
 
     const startSaveUser = (newUser) => {
@@ -16,12 +16,17 @@ export const useAuthStore = () => {
 
     const startLogin = (user) => {
 
-        dispatch( onLogin(user) )
+      dispatch( onLogin(user) )
+      
     }
 
-    const startGetStorageUpdate = (newUsers) => {
-        dispatch( onUpdateStorage(newUsers))
-    }
+    const startLogout = () => {
+      dispatch( onLogout())
+  }
+
+  const startGetStorageUpdate = (newUsers) => {
+    dispatch( onUpdateStorage(newUsers))
+}
 
 
 
@@ -30,10 +35,12 @@ export const useAuthStore = () => {
     // State
     users,
     user,
+    status,
 
     // Functions
     startSaveUser,
     startLogin,
+    startLogout,
     startGetStorageUpdate
   }
 }

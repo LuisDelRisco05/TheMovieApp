@@ -11,7 +11,7 @@ export const ListMoviesHorizontalMedium = ({ movie, title }) => {
   return (
 
         <>
-          <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+          <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 5 }}>
             
             <Text style={ styles.title }>{title}</Text>
             <Icon 

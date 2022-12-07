@@ -12,22 +12,8 @@ export const AllScreen = ({ navigation }) => {
 
   return (
 
-    <View style={{ flex: 1, backgroundColor: '#1F1C2C'  }}>
-
-      <TouchableOpacity
-        style={{ width: 50, top: 28, left: 18 }}
-        onPress={ () => {
-          navigation.navigate('HomeScreen')
-        }}
-      >
-      <Icon 
-        name="arrow-back-outline"
-        size={25}
-        color="#FFF"
-          
-      />
-      </TouchableOpacity>
-      <Text style={ styles.title }>All</Text>
+    <View style={{ flex: 1, backgroundColor: '#1F1C2C', paddingTop: 10  }}>
+      <Text style={ styles.title }>Saved</Text>
         {
           savedMovies?.length > 0 &&
           (

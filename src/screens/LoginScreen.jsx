@@ -1,11 +1,10 @@
-import { useEffect, useState } from "react";
-import { Alert, Keyboard, KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native"
+import { useState } from "react";
+import { Alert, Keyboard, KeyboardAvoidingView, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native"
 
 import Icon from 'react-native-vector-icons/Ionicons';
 import LinearGradient from 'react-native-linear-gradient';
 import { useForm } from "../hooks/useForm";
 import { useAuthStore } from "../hooks/useAuthStore";
-import { asyncStorage } from "../helpers/asyncStorage";
 
 
 export const LoginScreen = ({ navigation }) => {
@@ -14,27 +13,12 @@ export const LoginScreen = ({ navigation }) => {
 
   const { users, startLogin } = useAuthStore();
 
-  const { saveUserStorage, getUserStorage } = asyncStorage();
 
   const { email, password, onChange, form } = useForm({
     email:'',
     password:''
   })
 
-  useEffect(() => {
-   
-    getUserStorage() 
-
-  }, [])
-
-  useEffect(() => {
-
-    if(users.length > 0) {   
-        saveUserStorage(users)
- 
-    }
-
-  }, [users])
 
   const onLogIn = () => {
     Keyboard.dismiss();
@@ -47,6 +31,7 @@ export const LoginScreen = ({ navigation }) => {
       )
       return
     } 
+
 
    const user = users.find( u => u.email === form.email)
 
@@ -81,7 +66,6 @@ export const LoginScreen = ({ navigation }) => {
     
 
     startLogin(user)
-    navigation.replace('BottomTab')
 
   }
 

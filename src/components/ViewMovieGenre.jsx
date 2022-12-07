@@ -24,7 +24,7 @@ export const ViewMovieGenre = ({ movie, genre }) => {
             navigation.navigate( 'DetailsScreen', movie )
             startGetMovieId(movie.id)
         }}
-        style={{ flex: 1, marginLeft: 18 }}
+        style={{ flex: 1 }}
     >
         {
         movie?.backdrop_path && 
@@ -90,10 +90,11 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(221, 221, 221, 0.2)', 
         borderRadius: 22,
         height: 127,
-        marginVertical: 20,
+        marginVertical: 10,
         padding: 10,
         flexDirection: 'row',
-        width: 339 
+        width: 339,
+        marginHorizontal: 20 
       },
     img: {
         borderRadius: 17,
@@ -105,7 +106,7 @@ const styles = StyleSheet.create({
     },
     title: {
         color: '#FFF',
-        fontSize: 14,
+        fontSize: 12,
         fontWeight: '700',
         left: 10,
         top: 10, 
@@ -131,7 +132,7 @@ const styles = StyleSheet.create({
         bottom: 5,
         left: 10,
         backgroundColor: 'gray',
-        width: 43,
+        width: 53,
         height: 30,
         justifyContent: 'center',
         borderRadius: 20,

@@ -1,4 +1,4 @@
-import { FlatList, StyleSheet, Text } from "react-native"
+import { FlatList, StyleSheet, Text, View } from "react-native"
 
 import { ListSmall } from "./ListSmall"
 
@@ -7,7 +7,7 @@ export const ListMoviesHorizontalSmall = ({ movie, title }) => {
   
 
   return (
-        <>  
+        <View style={{ marginTop: 5 }}>  
             <Text style={ styles.title }>{title}</Text>
             <FlatList 
                 data={ movie }
@@ -21,7 +21,7 @@ export const ListMoviesHorizontalSmall = ({ movie, title }) => {
                 showsHorizontalScrollIndicator={ false }
 
             />
-        </>
+        </View>
   )
 }
 
@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     color: '#E2E2E2', 
     fontSize: 21,
     fontWeight: '700', 
-    marginBottom: 5,
+    marginBottom: 10,
     marginLeft: 18,
   },
 });

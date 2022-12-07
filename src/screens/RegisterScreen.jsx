@@ -5,15 +5,14 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import LinearGradient from 'react-native-linear-gradient';
 import { useForm } from "../hooks/useForm";
 import { useAuthStore } from "../hooks/useAuthStore";
-import { asyncStorage } from "../helpers/asyncStorage";
+
 
 export const RegisterScreen = ({ navigation }) => {
 
   const [ hidePassword, setHidePassword] = useState(true);
 
-  const { saveUserStorage, getUserStorage } = asyncStorage();
-
-  const { users, startSaveUser } = useAuthStore();
+ 
+  const { users, user, startSaveUser } = useAuthStore();
 
   const { name, email, password, onChange, form } = useForm({
     name:'',
@@ -21,21 +20,6 @@ export const RegisterScreen = ({ navigation }) => {
     password:'',
     id: Date.now().toString(36)
   })
-
-  useEffect(() => {
-   
-    getUserStorage() 
-
-  }, [])
-
-  useEffect(() => {
-
-    if(users.length > 0) {   
-        saveUserStorage(users)
-
-    }
-
-  }, [users])
 
 
   const onSignUp = () => {  
@@ -54,7 +38,6 @@ export const RegisterScreen = ({ navigation }) => {
 
     startSaveUser(form);
 
-    navigation.replace('LoginScreen');
   }
 
 

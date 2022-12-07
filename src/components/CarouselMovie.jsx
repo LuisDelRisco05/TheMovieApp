@@ -11,7 +11,7 @@ export const CarouselMovie = ({ topRated }) => {
   return (
 
 
-    <View style={{ height: 210, marginBottom: 5 }}>
+    <View style={{ height: 210, marginBottom: 35 }}>
 
           <Carousel
             data={ topRated }
@@ -25,6 +25,10 @@ export const CarouselMovie = ({ topRated }) => {
             inactiveSlideOpacity={ 0.5 }  
             inactiveSlideScale={ 0.7 }
             sliderWidth={ screenWidth }
+            autoplay
+            autoplayDelay={ 3000 }
+            loop
+            enableSnap
             
           />
 

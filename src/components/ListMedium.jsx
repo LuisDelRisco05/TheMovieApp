@@ -77,18 +77,18 @@ const styles = StyleSheet.create({
     img:{
         borderRadius: 25,
         height: 132, 
-        marginHorizontal: 20,
+        marginHorizontal: 10,
         width: 153, 
     },
     containerInfo: {
-        backgroundColor:'rgba(255, 255, 255, 0.2)',
+        backgroundColor:'rgba(255, 255, 255, 0.5)',
         borderRadius: 20,
         bottom: 2,
         height: 42,
         position: 'absolute',
         right: 25,
         width: 140,
-        left: 27
+        left: 17
         
       },
     title: {

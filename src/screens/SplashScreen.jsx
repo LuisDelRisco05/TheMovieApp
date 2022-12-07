@@ -1,13 +1,51 @@
+import { useEffect } from "react";
 import { useRef } from "react";
 import { Animated, StyleSheet, View } from "react-native";
 import { SvgXml } from 'react-native-svg'
 import movieLogo from "../assets/movieLogo";
+import { asyncStorage } from "../helpers/asyncStorage";
+import { useAuthStore } from "../hooks/useAuthStore";
 
 
 export const SplashScreen = ({ navigation }) => {
 
   const opacity = useRef( new Animated.Value(0) ).current;
-  const top = useRef( new Animated.Value(-150) ).current;
+
+  const { saveUserStorage, getUserStorage } = asyncStorage();
+
+  const { users, user } = useAuthStore();
+
+  useEffect(() => {
+   
+    getUserStorage() 
+
+  }, [])
+
+  useEffect(() => {
+
+    if(users?.length > 0) {   
+        saveUserStorage(users, user)
+ 
+    }
+
+  }, [users])
+
+  const fadeIn = () => {
+  
+    Animated.timing(
+      opacity,
+      {
+        toValue: 1,
+        duration: 1000,
+        useNativeDriver: true,
+      }
+    ).start();
+  }
+
+  useEffect(() => {
+    fadeIn()
+  }, [])
+  
 
   const fadeOut = () => {
   
@@ -15,16 +53,7 @@ export const SplashScreen = ({ navigation }) => {
       opacity,
       {
         toValue: 0,
-        duration: 300,
-        useNativeDriver: true,
-      }
-    ).start();
-
-    Animated.timing(
-      top,
-      {
-        toValue: -150,
-        duration: 1000,
+        duration: 2000,
         useNativeDriver: true,
       }
     ).start();
@@ -34,20 +63,17 @@ export const SplashScreen = ({ navigation }) => {
 
   setTimeout(() => {
     fadeOut()
-    navigation.navigate('LoginScreen')
-  }, 3000);
+  }, 2000);
+
+  setTimeout(() => {
+    navigation.navigate('RegisterScreen')
+  }, 4000);
 
   return (
-    
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-
       <Animated.View style={{ 
         ...styles.animate, 
         opacity,
-        transform: [{
-          translateY: top
-        }]
-      }} />
+      }}>
 
         <SvgXml 
             xml={ movieLogo } 
@@ -55,14 +81,15 @@ export const SplashScreen = ({ navigation }) => {
             height={222} 
             style={{ marginTop: 5, marginRight: 10}}
         />
-    </View>
+      </Animated.View>  
   )
 }
 
 const styles = StyleSheet.create({
   animate: {
-    width: 30,
-    height: 30
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 })
 

@@ -1,4 +1,4 @@
-import { NavigationContainer, DarkTheme } from '@react-navigation/native'
+
 import { createDrawerNavigator } from "@react-navigation/drawer";
 
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -11,15 +11,11 @@ import { AllScreen, ProfileScreen, SearchScreen } from '../screens';
 const Drawer = createDrawerNavigator();
 
 export const DrawerNavigation =() => {
-  return (
-
-      <NavigationContainer
-        theme={ DarkTheme }
-      >
-        
+  return (     
         <Drawer.Navigator
             screenOptions={{
-              headerShown: false,
+              headerTitle:'',
+              headerStyle: { backgroundColor: '#1F1C2C'},
               drawerStyle: {
                 backgroundColor: '#1F1C2C',
                 paddingTop: 20
@@ -91,7 +87,5 @@ export const DrawerNavigation =() => {
 
             
         </Drawer.Navigator>
-
-      </NavigationContainer>
   );
 }

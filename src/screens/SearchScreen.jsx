@@ -15,7 +15,7 @@ export const SearchScreen = () => {
 
   return (
 
-    <View style={{ paddingLeft: 22, flex: 1, backgroundColor: '#1F1C2C'  }}>
+    <View style={{ paddingLeft: 22, flex: 1, backgroundColor: '#1F1C2C' }}>
 
         <Text style={ styles.user}>Hi, {user.name}</Text>
 
@@ -46,14 +46,16 @@ export const SearchScreen = () => {
         {
           view &&
           (
-            <FlatList 
-              data={ search }
-              keyExtractor={ item => item.id }
-              renderItem={ ({ item }) => (
-                <ViewMovieGenre movie={ item } />
-              )}
-              showsVerticalScrollIndicator={ false }
-            />
+            <View style={{ flex: 1, paddingBottom: 70}}>
+              <FlatList 
+                data={ search }
+                keyExtractor={ item => item.id }
+                renderItem={ ({ item }) => (
+                  <ViewMovieGenre movie={ item } />
+                )}
+                showsVerticalScrollIndicator={ false }
+              />
+            </View>
           )
         }
                  
